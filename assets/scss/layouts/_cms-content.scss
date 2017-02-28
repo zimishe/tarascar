@@ -1,0 +1,188 @@
+.link-green {
+    position: relative;
+    font: 15px/20px $acrombold;
+    text-transform: uppercase;
+    color: $darkgreen;
+    
+    &:after {
+        content: '';
+        width: 100%;
+        height: 1px;
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        opacity: 1;
+        background: $darkgreen;
+        @include transition(all, .2s);
+    }
+    
+    &:before {
+        content: "\64";
+        font-family: "udg" !important;
+        font-style: normal !important;
+        font-weight: normal !important;
+        font-variant: normal !important;
+        text-transform: none !important;
+        speak: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        
+        position: absolute;
+        right: -35px;
+        top: -1px;
+        font-size: 20px;
+        color: $darkgreen;
+        @include transition(all, .2s);
+    }
+    
+    &:hover {
+        cursor: pointer;
+        
+        &:after {
+            opacity: 0;
+        }
+        
+        &:before {
+            right: -50px;
+        }
+    }
+}
+
+.button-green {
+    display: inline-block;
+    padding: 0 15px;
+    height: 26px;
+    background-color: $darkgreen;
+    border-radius: 3px;
+    border: 1px solid $darkgreen;
+    box-shadow: 0 3px 19px rgba(10, 30, 39, 0.44);
+    font: 13px/26px $acrombold;
+    text-transform: uppercase;
+    color: $navwhite;
+    text-decoration: none;
+    @include transition(all, .2s);
+    
+    &:hover {
+        background: none;
+        cursor: pointer;
+    }
+    
+    &-big {
+        display: inline-block;
+        padding: 0 20px;
+        font: 16px/44px $acrombold;
+        color: $navwhite;
+        text-align: center;
+        height: 46px;
+        background: $darkgreen;
+        border-radius: 3px;
+        border: 2px solid $darkgreen;
+        text-transform: uppercase;
+        @include transition(all, .2s);
+        
+        &:hover {
+            background: transparent;
+            color: $darkgreen;
+            cursor: pointer;
+        }
+    }
+    
+}
+
+.caption-animated {
+    position: relative;
+    
+    h3 {
+        font: 45px/50px $acrombold;
+        color: $captionblack;
+        text-align: left;
+        display: inline-block;
+        width: 220px;
+        position: relative;
+        text-transform: uppercase;
+    }
+    
+    
+    &__dots {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        
+        .item {
+            position: absolute;
+            display: block;
+            @include transition(all, .4s);
+            
+            &.dark-green-big {
+                background: $darkgreen;
+                width: 25px;
+                height: 25px;
+                left: -100%;
+                top: -140%;
+                
+                &.anim {
+                    left: -4%;
+                    top: -40%;
+                }
+            }
+            
+            &.green-big {
+                background: $activegreen;
+                width: 19px;
+                height: 19px;
+                left: 200%;
+                top: -65%;
+                
+                &.anim {
+                    left: -5%;
+                    top: -5%;
+                }
+            }
+            
+            &.green-small {
+                background: $activegreen;
+                width: 12px;
+                height: 12px;
+                left: 212%;
+                top: 80%;
+                
+                &.anim {
+                    left: -2.5%;
+                    top: -1%;
+                }
+            }
+        }
+    }
+    
+    @include respond-to(sm) {
+        &__dots {
+            display: none;
+        }
+        
+        &:before {
+            content: url(../img/squares-sm.png);
+            position: absolute;
+            left: -60px;
+            top: -20px;
+        }
+    }
+    
+    @include respond-to(xs) {
+        padding-left: 40px;
+        
+        h3 {
+            font: 26px/30px $acrombold;
+        }
+        
+        &:before {
+            content: url(../img/squares-xs.png);
+            position: absolute;
+            left: 6px;
+            top: -7px;
+        }
+    }
+}
