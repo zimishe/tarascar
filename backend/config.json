@@ -3,5 +3,11 @@
   "http_host":"http://localhost:8888",
   "mongoose": {
     "uri": "mongodb://localhost/sto"
+  },
+  "mysql": {
+    "host": "localhost",
+    "user":"root",
+    "password":"dell",
+    "database":"nova_doba"
   }
 }
