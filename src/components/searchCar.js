@@ -39,6 +39,7 @@ const mapDispatchToProps = function(dispatch) {
 class SearchCar extends Component {
     render() {
         return (
+
             <form action="" className="car__search">
                 <h2>Пошук авто поруч з вами</h2>
                 <div className="car__search__inputs">

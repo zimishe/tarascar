@@ -6,6 +6,7 @@ var express = require('express'),
     path = require('path'),
     cors = require('cors'),
     app = express(),
+    bodyParser = require('body-parser'),
     config = require('./config/config'),
     winston = require('winston'),
     session = require('express-session'),
@@ -14,6 +15,8 @@ var express = require('express'),
 
 app.set('title', 'BlaBla');
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
 //app.use(express.session());
 //app.use(app.router);
 
