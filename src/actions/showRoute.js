@@ -69,8 +69,6 @@ export function showRoute(google, map) {
                 }
             });
         }
-
-        
     });
     
    
