@@ -4,16 +4,13 @@
 var winston = require('winston');
 var express = require('express');
 var fs = require('fs');
-
+var users = require('../models/user');
 module.exports.controller = function(app) {
 
-
-    app.get('/signup', function(req, res) {
-        res.send("here");
-    });
-
-
-    app.post('/signUp',function(req,res){
-        console.log(req.query);
+    app.get('/get', function(req, res) {
+        var id = req.query.id;
+        users.getAllByUser(id,function(err,response){
+            console.log(response);
+        })
     });
 }

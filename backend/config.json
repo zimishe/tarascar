@@ -8,6 +8,6 @@
     "host": "localhost",
     "user":"root",
     "password":"dell",
-    "database":"tarascar"
+    "database":"nova_doba"
   }
 }

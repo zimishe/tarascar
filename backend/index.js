@@ -24,20 +24,6 @@ fs.readdirSync('./backend/controllers').forEach(function (file) {
     }
 });
 
-app.get('/', function(request, response,next){
-    connection.query('Select * from users ', function (error, results, fields) {
-        if (error) throw error;
-        response.send(results);
-    });
-
-    connection.end();
-});
-
-
-app.post('/',function (request,response,next) {
-    winston.log(request.query.name);
-});
-
 
 http.createServer(app).listen(config.get('port'),'',function(){
     console.log('Express server listening on port ' + config.get('port'));

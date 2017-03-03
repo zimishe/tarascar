@@ -3,17 +3,16 @@
  */
 var mysql = require('mysql')
     , async = require('async');
-
+var config      = require('./config');
 var PRODUCTION_DB = config.get('mysql').database
     , TEST_DB = config.get('mysql').database;
-var config      = require('./config');
 
 exports.MODE_TEST = 'mode_test';
 exports.MODE_PRODUCTION = 'mode_production';
 
 var state = {
     pool: null,
-    mode: null,
+    mode: null
 }
 
 exports.connect = function(mode, done) {
