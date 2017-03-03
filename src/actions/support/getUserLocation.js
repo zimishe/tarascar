@@ -7,13 +7,14 @@ import You from './../../../assets/img/morty.png'
 
 export function getUserLocation(map, google) {
     if (navigator.geolocation) {
+        
         navigator.geolocation.getCurrentPosition(function(position) {
             
             let pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
+            
             map.setCenter(pos);
 
             // eslint-disable-next-line

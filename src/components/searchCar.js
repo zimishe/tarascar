@@ -29,7 +29,20 @@ const mapDispatchToProps = function(dispatch) {
             }, function(error, response, body) {
                 console.log(body);
             });
+    
+            let fromVal = document.querySelector('#from').value;
             
+            
+            // let request = {
+            //     origin: start,
+            //     destination: end,
+            //     travelMode: 'DRIVING'
+            // };
+            // directionsService.route(request, function(result, status) {
+            //     if (status == 'OK') {
+            //         directionsDisplay.setDirections(result);
+            //     }
+            // });
         }
     };
 };

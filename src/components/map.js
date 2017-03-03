@@ -49,8 +49,6 @@ class Map extends Component {
             }
         }
         
-        console.log('ml', markers.length);
-        
         if(markers !== '') {
             setMapOnAll(null);
         }   
