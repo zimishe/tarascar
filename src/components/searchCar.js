@@ -20,29 +20,18 @@ const mapDispatchToProps = function(dispatch) {
         dispatch,
         carSearchHandler: (event) => {
             event.preventDefault();
-            request({
-                uri: "http://localhost:8888/",
-                method: "get",
-                form: {
-                    name: "Bob"
-                }
-            }, function(error, response, body) {
-                console.log(body);
-            });
-    
-            let fromVal = document.querySelector('#from').value;
-            
-            
-            // let request = {
-            //     origin: start,
-            //     destination: end,
-            //     travelMode: 'DRIVING'
-            // };
-            // directionsService.route(request, function(result, status) {
-            //     if (status == 'OK') {
-            //         directionsDisplay.setDirections(result);
+           
+            // request({
+            //     uri: "http://localhost:8888/",
+            //     method: "get",
+            //     form: {
+            //         name: "Bob"
             //     }
+            // }, function(error, response, body) {
+            //     console.log(body);
             // });
+
+           
         }
     };
 };
@@ -54,8 +43,11 @@ class SearchCar extends Component {
                 <h2>Пошук авто поруч з вами</h2>
                 <div className="car__search__inputs">
                     <input type="text" id="from" name="data[from]" placeholder="від" />
-                    <input type="text" id="to" name="data[to]" placeholder="до" />    
-                    <button className="car__search__submit" onClick={this.props.carSearchHandler.bind(this)}>Пошук</button>
+                    <input type="text" id="to" name="data[to]" placeholder="до" />   
+                    <h3>Вкажіть проміжні точки маршруту</h3>
+                    <input type="text" className="waypoint" placeholder="проміжна точка" />
+                    <input type="text" className="waypoint" placeholder="проміжна точка" />
+                    <button className="car__search__submit">Пошук</button>
                 </div>
             </form>
         )
