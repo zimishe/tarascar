@@ -2,22 +2,16 @@
  * Created by taras on 13.07.16.
  */
 var config      = require('./config');
+var db      = require('./db');
 
 var winston = require('winston');
 
 var mysql      = require('mysql');
-var connection = mysql.createConnection({
-    host     : config.get('mysql').host,
-    user     : config.get('mysql').user,
-    password : config.get('mysql').password,
-    database : config.get('mysql').database
-});
-
-
-connection.connect(function(err) {
+db.connect(db.MODE_PRODUCTION, function(err) {
     if (err) {
-        console.error('error connecting: ' + err.stack);
-        return;
-    }});
-
-module.exports = connection;
+        console.log('Unable to connect to MySQL.')
+        process.exit(1)
+    } else {
+        console.log('Listening on port 3000...')
+    }
+})
