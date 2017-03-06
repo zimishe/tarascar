@@ -3,10 +3,16 @@
  */
 var db = require('../config/db.js');
 
-exports.create = function(userId, text, done) {
-    var values = [userId, text, new Date().toISOString()];
+var User = function (data) {
+    this.data = data;
+}
 
-    db.get().query('INSERT INTO users (user_id, text, date) VALUES(?, ?, ?)', values, function(err, result) {
+User.prototype.data = {}
+
+exports.create = function(data, done) {
+    var values = [data.name, data.surname, data.email, data.password];
+
+    db.get().query('INSERT INTO users (name, surname, email, password) VALUES(?, ?, ?, ?)', values, function(err, result) {
         if (err) return done(err);
         done(null, result.insertId)
     })
@@ -23,5 +29,13 @@ exports.getAllByUser = function(userId, done) {
     db.get().query('SELECT * FROM users WHERE id = ?', userId, function (err, rows) {
         if (err) return done(err);
         done(null, rows)
+    })
+}
+
+exports.getIdByEmail = function(email,done) {
+    db.get().query('select id from users where email=? limit 1',email,function(err,rows) {
+        if(err) return done(err);
+        var id = typeof rows[0] !="undefined"?rows[0].id:0;
+        done(null,id);
     })
 }
