@@ -13,9 +13,14 @@ var express = require('express'),
     fs = require('fs'),
     connection = require('./config/connection');
 
+var mailConnect = require('./config/mailer');
+var mailerConnect = new mailConnect(app);
 app.set('title', 'BlaBla');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+
 //app.use(bodyParser.json());
 //app.use(express.session());
 //app.use(app.router);

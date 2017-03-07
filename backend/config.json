@@ -9,5 +9,14 @@
     "user":"root",
     "password":"dell",
     "database":"tarascar"
+  },
+  "mail" : {
+    "from":"no-reply@example.com",
+    "host":"smtp.gmail.com",
+    "transportMethod":"SMTP",
+    "auth" : {
+      "user":"bania20091@gmail.com",
+      "pass":"80326341545taras"
+    }
   }
 }
