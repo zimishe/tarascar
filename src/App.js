@@ -16,7 +16,6 @@ class App extends Component {
     }
 }
 
-
 const mapStateToProps = function() {
     let data = store.getState();
     return {

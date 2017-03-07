@@ -44,7 +44,7 @@ module.exports.controller = function (app) {
         errors = req.validationErrors();
 
         if (errors) {
-            res.json({errors: errors});
+            res.json({s: s, errors: errors});
             return false;
         } else {
             errors = [];
@@ -83,17 +83,17 @@ module.exports.controller = function (app) {
                         }
                     });
 
-                    app.mailer.send('email', {
-                        to: data.email,
-                        subject: 'Registration Success',
-                        otherProperty: 'Other Property',
-                        data: data
-                    }, function (err) {
-                        if (err) {
-                            return;
-                        }
-                        console.log('Email Sent');
-                    });
+                    // app.mailer.send('email', {
+                    //     to: data.email,
+                    //     subject: 'Registration Success',
+                    //     otherProperty: 'Other Property',
+                    //     data: data
+                    // }, function (err) {
+                    //     if (err) {
+                    //         return;
+                    //     }
+                    //     console.log('Email Sent');
+                    // });
                 }
 
                 res.json({s: s, errors: errors});

@@ -22,11 +22,8 @@ const mapDispatchToProps = function(dispatch) {
             event.preventDefault();
            
             // request({
-            //     uri: "http://localhost:8888/",
-            //     method: "get",
-            //     form: {
-            //         name: "Bob"
-            //     }
+            //     uri: "http://localhost:8888/sign-up",
+            //     method: "post"
             // }, function(error, response, body) {
             //     console.log(body);
             // });
