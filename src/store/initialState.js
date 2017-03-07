@@ -3,7 +3,8 @@
  */
 
 const initialState = {
-    markers: ''
+    markers: '',
+    isLogged: false
 };
 
 export default initialState

@@ -1,7 +1,8 @@
 /**
  * Created by eugene on 07.03.17.
  */
-
+import store from './../store/store'
+import { login } from './login'
 import { removeFieldError } from './../actions/support/removeFieldError'
 
 export function validation(body) {
@@ -36,6 +37,13 @@ export function validation(body) {
         removeFieldError(inputs, parent);
         
     }   else {
+        store.dispatch(login(true));
+        
+        let regForm = document.querySelector('#registration');
+        
+        regForm.classList.remove('active');
+        
+        // need to return username
         console.log('success blyat');
     }
 }

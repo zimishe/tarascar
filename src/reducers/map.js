@@ -9,6 +9,10 @@ let reducer = function reducer(state = initialState, action) {
         case 'PLACE_CHANGED' :return {
             markers: action.markers
         };
+        
+        case 'USER_LOGGED_IN' :return {
+            isLogged: true
+        };
 
         default : return state
     }
