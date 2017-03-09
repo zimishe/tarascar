@@ -49,9 +49,11 @@ export function validation(body) {
         
         store.dispatch(login(true));
         
-        let regForm = document.querySelector('#registration');
+        let regForm = document.querySelector('#registration'),
+            body = document.body;
         
         regForm.classList.remove('active');
+        body.classList.remove('active');
         
         // need to return username
         console.log('success blyat');
