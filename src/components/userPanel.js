@@ -11,7 +11,7 @@ class UserPanel extends Component {
         
         function checkIfLogged(isLogged) {
             if (isLogged === true) {
-                return <LoggedIn username = 'Eugene'/>
+                return <LoggedIn username='Eugene'/>
             }   else {
                 return <LoggedOut />
             }

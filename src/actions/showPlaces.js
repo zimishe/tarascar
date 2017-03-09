@@ -3,8 +3,9 @@
  */
 
 import Icon from './../../assets/img/beer.png'
+// eslint-disable-next-line
 import store from './../store/store'
-
+// eslint-disable-next-line
 import { changePlace } from './changePlace'
 import { dragMarker } from './support/markerDrag'
 

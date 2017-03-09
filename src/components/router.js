@@ -5,7 +5,7 @@ import App from './../App'
 import UserCabinet from './../components/userCabinet'
 
 import React, { Component } from 'react'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router'
 
 class PageRouter extends Component {
     render() {

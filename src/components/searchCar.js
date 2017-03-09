@@ -5,7 +5,7 @@
 import React, { Component } from 'react'
 import store from './../store/store'
 import { connect } from 'react-redux'
-
+// eslint-disable-next-line
 import request from 'request'
 
 const mapStateToProps = function() {
