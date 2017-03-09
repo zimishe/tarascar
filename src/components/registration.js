@@ -46,6 +46,7 @@ class Test extends Component{
         return (
             <form action="http://localhost:8888/sign-up" method="post" className="car__search" id="registration">
                 <h2>Regis</h2>
+                <a className="close-reg-modal">x</a>
                 <div className="car__search__inputs" id="reg_inputs">
                     <input type="text" name="name" className="waypoint" placeholder="Name" />
                     <input type="text" name="surname" className="waypoint" placeholder="Surname" />

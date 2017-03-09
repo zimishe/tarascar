@@ -36,8 +36,12 @@ class Map extends Component {
         window.initMap = initMap.bind(this);
         
         // Asynchronously load the Google Maps script, passing in the callback reference
-
-        loadJS('https://maps.google.com/maps/api/js?key=AIzaSyDRUCOhK3QDvocwOtZMG4_Eyaw6dBbm95A&libraries=places&callback=initMap')
+        
+        if (window.google == undefined) {
+            loadJS('https://maps.google.com/maps/api/js?key=AIzaSyDRUCOhK3QDvocwOtZMG4_Eyaw6dBbm95A&libraries=places&callback=initMap')    
+        }   else {
+            window.initMap()
+        }
     }
     
     componentWillUpdate() {

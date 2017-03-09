@@ -5,6 +5,21 @@ body {
     display: table;
     vertical-align: middle;
     text-align: center;
+    
+    &:before {
+        content: '';
+        @include absolute();
+        visibility: hidden;
+        background: rgba(14, 14, 14, 0.55);
+        z-index: 3;
+        transition: all .2s ease;
+    }
+    
+    &.active {
+        &:before {
+            visibility: visible;
+        }
+    }
 }
 
 h2 {
@@ -153,8 +168,72 @@ h2 {
     top: 100px;
     transition: all .4s cubic-bezier(0.65, 0.05, 0.36, 1);
     transform: translate(-50%, -600px);
+    z-index: 4;
+    box-shadow: 0 0 20px 4px rgba(255, 255, 255, .4);
     
     &.active {
         transform: translate(-50%, 0);
+    }
+    
+    .close-reg-modal {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: #000;
+    }
+}
+
+.action {
+    &__tabs {
+        position: relative;
+    }
+    
+    &__tab {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        transition: opacity .2s ease;
+        opacity: 0;
+        
+        &.active {
+            opacity: 1;
+        }
+    }
+}
+
+
+.actions {
+    &__switcher {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px 0;
+        
+        li {
+            display: flex;
+            justify-content: center;
+            
+            a {
+                font: rem(16px, 20px) $bold;
+                color: #094f73;
+                transition: all .2s ease;
+                
+                &.active {
+                    color: #ccc;
+                    
+                    &:hover {
+                        cursor: default;
+                        color: #ccc;
+                        text-decoration: none;
+                    }
+                }
+                
+                &:hover {
+                    text-decoration: underline;
+                    color: #087ebb;
+                }
+            }
+        }
     }
 }
