@@ -37,6 +37,16 @@ export function validation(body) {
         removeFieldError(inputs, parent);
         
     }   else {
+        
+        let data = {
+            id: 1,
+            name: 'Eugene'
+        };
+        
+        let sessionData = JSON.stringify(data);
+        
+        sessionStorage.setItem('userData', sessionData);
+        
         store.dispatch(login(true));
         
         let regForm = document.querySelector('#registration');

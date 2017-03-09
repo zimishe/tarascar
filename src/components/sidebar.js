@@ -5,15 +5,22 @@
 import React, { Component } from 'react'
 import Search from './searchPlace'
 import SearchPlace from './searchCar'
-import Registration from './registration'
 
 class Sidebar extends Component {
     render() {
+        function setSidebarContent() {
+            let data = JSON.parse(sessionStorage.getItem('userData'));
+
+            if (data !== null) {
+                
+            }   else {
+                return <SearchPlace />
+            }   
+        }
+        
         return (
             <div className="gmap__sidebar">
                 <Search />
-                <SearchPlace />
-                <Registration />
             </div>
         )
     }
