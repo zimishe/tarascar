@@ -37,11 +37,23 @@ export function validation(body) {
         removeFieldError(inputs, parent);
         
     }   else {
+        
+        let data = {
+            id: 1,
+            name: 'Eugene'
+        };
+        
+        let sessionData = JSON.stringify(data);
+        
+        sessionStorage.setItem('userData', sessionData);
+        
         store.dispatch(login(true));
         
-        let regForm = document.querySelector('#registration');
+        let regForm = document.querySelector('#registration'),
+            body = document.body;
         
         regForm.classList.remove('active');
+        body.classList.remove('active');
         
         // need to return username
         console.log('success blyat');
