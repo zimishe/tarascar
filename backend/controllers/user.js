@@ -18,12 +18,63 @@ module.exports.controller = function (app) {
 
     app.get('/get', function (req, res) {
         var id = req.query.id;
-        users.getAllByUser(id, function (err, response) {
-            console.log(response);
-        })
+
     });
 
-    app.post('/sign-up', function (req, res) {
+    app.post('/sign-in', function (req, res) {
+        if (!req.body) return res.sendStatus(400);
+        var errors = [{}];
+        var data = req.body;
+        var s = 0;
+
+        req.checkBody("email", "Enter a valid email address.").isEmail();
+        req.checkBody("password", "Invalid Password.").isLength({
+            options: [{min: 2, max: 10}],
+            errorMessage: 'Must be between 2 and 10 chars long'
+        }).notEmpty();
+
+        errors = req.validationErrors();
+
+        if (errors) {
+            res.json({s: s, errors: errors});
+            return false;
+        } else {
+            var promise = new Promise(function (resolve, reject) {
+                users.getAllByEmail(data.email, function (e, result) {
+                    if (e != null) {
+                        console.log(e);
+                    } else {
+                        resolve(result);
+                    }
+                });
+            });
+
+            promise.then(function (result) {
+                errors = [];
+                if(result) {
+                    data.password = md5(data.password);
+                    if(result.password!=data.password) {
+                        console.log(result.password,data.password,"here");
+                        errors.push({param: 'password', msg: 'confirm password is incorect'});
+                    }
+                } else {
+                    errors.push({param: 'email', msg: 'Data is incorect'});
+                }
+                if(!errors.length) {
+                    s = 1;
+                    delete result.password;
+                    login(req,result,res,function(){
+                       console.log("ok");
+                    });
+                }
+
+                res.json({s: s, errors: errors});
+                return res.sendStatus(200);
+            })
+        }
+    });
+
+        app.post('/sign-up', function (req, res) {
         if (!req.body) return res.sendStatus(400);
         var errors = [{}];
         var data = req.body;
@@ -54,7 +105,7 @@ module.exports.controller = function (app) {
 
 
             var promise = new Promise(function (resolve, reject) {
-                users.getIdByEmail(data.email, function (e, id) {
+                users.getAllByEmail(data.email, function (e, id) {
                     if (e != null) {
                         console.log(e);
                     } else {
@@ -64,7 +115,7 @@ module.exports.controller = function (app) {
             });
 
             promise.then(function (id) {
-                if (id > 0) {
+                if (typeof id!= "undefined" && id.id > 0) {
                     errors.push({param: 'email', msg: 'email is unique'});
                 }
 
@@ -79,6 +130,9 @@ module.exports.controller = function (app) {
                             console.log(err, "error");
                         } else {
                             s = response;
+                            login(req,id,res,function(){
+                                console.log("user login");
+                            });
                             console.log(response, "success");
                         }
                     });
@@ -101,4 +155,11 @@ module.exports.controller = function (app) {
             });
         }
     })
+
+    var login = function (req, result, res, next) {
+        var sess=req.session;
+        sess.user = result;
+        //console.log(sess);
+        next();
+    };
 }

@@ -39,3 +39,10 @@ exports.getIdByEmail = function(email,done) {
         done(null,id);
     })
 }
+
+exports.getAllByEmail = function(email,done) {
+    db.get().query('select * from users where email=? limit 1',email,function(err,rows) {
+        if(err) return done(err);
+        done(null,rows[0]);
+    })
+}

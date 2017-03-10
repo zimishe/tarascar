@@ -20,6 +20,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
+app.use(session({secret: '147896325'}));
 
 //app.use(bodyParser.json());
 //app.use(express.session());
