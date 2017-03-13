@@ -4,6 +4,8 @@
 import React, { Component } from 'react'
 import LoggedIn from './support/loggedIn'
 import LoggedOut from './support/loggedOut'
+import ActionsSwitcher from './support/actionsSwitcher'
+import store from './../store/store'
 
 class UserPanel extends Component {
     render() {
@@ -16,9 +18,19 @@ class UserPanel extends Component {
                 return <LoggedOut />
             }
         }
+
+        function setSidebarContent() {
+            let isLogged = sessionStorage.getItem('userData'),
+                data;
+
+            (isLogged !== null) ? data = true : data = false;
+
+            return <ActionsSwitcher isLogged={data} />
+        }
         
         return (
             <div className="user-panel">
+                {setSidebarContent()}    
                 {checkIfLogged(isLogged)}   
             </div>
         )

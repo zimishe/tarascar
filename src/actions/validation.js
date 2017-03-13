@@ -43,7 +43,8 @@ export function validation(body) {
             name: 'Eugene'
         };
         
-        let sessionData = JSON.stringify(data);
+        let sessionData = JSON.stringify(data),
+            offerButton = document.querySelector('.actions__switcher li:nth-last-of-type(1) a');
         
         sessionStorage.setItem('userData', sessionData);
         
@@ -54,6 +55,7 @@ export function validation(body) {
         
         regForm.classList.remove('active');
         body.classList.remove('active');
+        offerButton.classList.remove('logged-out');
         
         // need to return username
         console.log('success blyat');

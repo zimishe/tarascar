@@ -89,7 +89,6 @@ h2 {
 .car {
     &__search {
         margin-top: 30px;
-        display: none;
         
         &.active {
             display: inherit;
@@ -143,9 +142,10 @@ h2 {
 }
 .user-panel {
     display: flex;
+    justify-content: space-between;
     flex-basis: 100%;
     background: #fff;
-    padding: 15px;
+    border-bottom: 1px solid #ccc;
     
     p {
         font: rem(15px, 18px) $gotham-bold;
@@ -156,6 +156,10 @@ h2 {
             color: #3875d7;
             text-decoration: underline;
         }
+    }
+    
+    &__welcome {
+        padding: 10px 15px;
     }
     
     &--logged-out {
@@ -188,6 +192,7 @@ h2 {
     }
     
     form {
+        display: none;
         margin-top: 0;
         
         .bottom__info {
@@ -232,31 +237,39 @@ h2 {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        padding: 20px 0;
         
         li {
             display: flex;
+            height: 100%;
+            min-height: 50px;
+            align-items: center;
             justify-content: center;
+            padding: 0 15px;
+            transition: all .2s ease;
+            
+            &:hover {
+                cursor: pointer;
+            }
+            
+            &:nth-of-type(1) {
+                background: #d5e7f7;
+                
+                &:hover {
+                    background: #c1d5e6;
+                }
+            }
+            
+            &:nth-of-type(2) {
+                background: #c5fbed;
+                
+                &:hover {
+                    background: #ade2d4;
+                }
+            }
             
             a {
                 font: rem(16px, 20px) $bold;
                 color: #094f73;
-                transition: all .2s ease;
-                
-                &.active {
-                    color: #ccc;
-                    
-                    &:hover {
-                        cursor: default;
-                        color: #ccc;
-                        text-decoration: none;
-                    }
-                }
-                
-                &:hover {
-                    text-decoration: underline;
-                    color: #087ebb;
-                }
             }
         }
     }
