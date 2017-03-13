@@ -37,7 +37,7 @@ class Map extends Component {
         
         // Asynchronously load the Google Maps script, passing in the callback reference
         
-        if (window.google == undefined) {
+        if (window.google === undefined) {
             loadJS('https://maps.google.com/maps/api/js?key=AIzaSyDRUCOhK3QDvocwOtZMG4_Eyaw6dBbm95A&libraries=places&callback=initMap')    
         }   else {
             window.initMap()

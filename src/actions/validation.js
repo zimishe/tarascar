@@ -11,9 +11,9 @@ export function validation(body) {
     if (status < 1) {
         let errors = body.errors;
         
-        let parent = document.querySelector('#reg_inputs'),
-            errorTip = document.querySelectorAll('.error__tip'),
-            inputs = document.querySelectorAll('#reg_inputs input');
+        let parent = document.querySelector('.car__search.active .reg_inputs'),
+            errorTip = document.querySelectorAll('.car__search.active .reg_inputs .error__tip'),
+            inputs = document.querySelectorAll('.car__search.active .reg_inputs input');
         
         errorTip.forEach((el) => {
             parent.removeChild(el)
@@ -23,7 +23,7 @@ export function validation(body) {
             let name = el.param,
                 message = el.msg;
             
-            let field = document.querySelector('input[name='+name+']');
+            let field = document.querySelector('.car__search.active .reg_inputs input[name='+name+']');
             
             let par = document.createElement('p');
             
@@ -49,7 +49,7 @@ export function validation(body) {
         
         store.dispatch(login(true));
         
-        let regForm = document.querySelector('#registration'),
+        let regForm = document.querySelector('.forms-modal'),
             body = document.body;
         
         regForm.classList.remove('active');

@@ -8,7 +8,7 @@ class LoggedOut extends Component {
     componentDidMount() {
         function showRegisterPopup() {
             let link = document.querySelector('.log-in__link'),
-                registerForm = document.querySelector('#registration'),
+                formModal = document.querySelector('.forms-modal'),
                 body = document.body,
                 closeButton = document.querySelector('.close-reg-modal');
             
@@ -17,13 +17,13 @@ class LoggedOut extends Component {
                 
                 link.onclick = (e) => {
                     e.preventDefault();
-                    registerForm.classList.toggle('active');
+                    formModal.classList.toggle('active');
                     body.classList.add('active');
                 };
                 
                 closeButton.onclick = () => {
                     body.classList.remove('active');
-                    registerForm.classList.remove('active');
+                    formModal.classList.remove('active');
                 }
             }
         }

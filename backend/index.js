@@ -26,6 +26,7 @@ app.use(session({secret: '147896325'}));
 //app.use(express.session());
 //app.use(app.router);
 
+
 fs.readdirSync('./backend/controllers').forEach(function (file) {
     if(file.substr(-3) == '.js') {
         route = require('./controllers/' + file);

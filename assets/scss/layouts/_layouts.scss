@@ -89,6 +89,11 @@ h2 {
 .car {
     &__search {
         margin-top: 30px;
+        display: none;
+        
+        &.active {
+            display: inherit;
+        }
         
         &__inputs {
             display: flex;
@@ -159,7 +164,7 @@ h2 {
     }
 }
 
-#registration {
+.forms-modal {
     position: absolute;
     width: 300px;
     background: #fff;
@@ -170,16 +175,35 @@ h2 {
     transform: translate(-50%, -600px);
     z-index: 4;
     box-shadow: 0 0 20px 4px rgba(255, 255, 255, .4);
-    
+
     &.active {
         transform: translate(-50%, 0);
     }
-    
+
     .close-reg-modal {
         position: absolute;
         right: 10px;
         top: 10px;
         color: #000;
+    }
+    
+    form {
+        margin-top: 0;
+        
+        .bottom__info {
+            margin-top: 15px;
+            
+            p {
+                font: rem(12px, 14px) $gotham-book;
+                color: #232323;
+                text-align: left;
+                
+                a {
+                    font: rem(12px, 14px) $gotham-bold;
+                    color: #3875d7;
+                }
+            }
+        }
     }
 }
 

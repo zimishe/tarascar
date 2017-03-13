@@ -1,6 +1,6 @@
 {
   "port" : 3002,
-  "http_host":"http://localhost:8888",
+  "http_host":"http://localhost:3002",
   "mongoose": {
     "uri": "mongodb://localhost/sto"
   },
