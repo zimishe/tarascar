@@ -8,6 +8,8 @@ import { removeFieldError } from './../actions/support/removeFieldError'
 export function validation(body) {
     let status = body.s;
     
+    console.log('bb', body);
+    
     if (status < 1) {
         let errors = body.errors;
         

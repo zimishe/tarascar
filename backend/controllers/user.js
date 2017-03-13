@@ -68,7 +68,7 @@ module.exports.controller = function (app) {
                     });
                 }
 
-                res.json({s: s, errors: errors});
+                res.json({s: s, errors: errors,user:result});
                 return res.sendStatus(200);
             })
         }
