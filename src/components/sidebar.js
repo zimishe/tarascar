@@ -5,6 +5,7 @@
 import React, { Component } from 'react'
 import Search from './searchPlace'
 import SearchPlace from './searchCar'
+import OfferCar from './offerCar'
 
 class Sidebar extends Component {
     render() {
@@ -16,7 +17,7 @@ class Sidebar extends Component {
                         <SearchPlace />
                     </div>
                     <div className="action__tab" data-tab="offer">
-                        <p>Offer car</p>
+                        <OfferCar />
                     </div>
                     
                 </div>

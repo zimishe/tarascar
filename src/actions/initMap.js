@@ -6,6 +6,7 @@ import { fromToCoords } from './../actions/support/fromToCoords'
 // eslint-disable-next-line
 import { showPlaces } from './showPlaces'
 import Icon from './../../assets/img/morty.png'
+import { initOfferSearchFields } from './support/initOfferSearchFields'
 
 export function initMap() {
     let map,
@@ -52,5 +53,6 @@ export function initMap() {
     //  ==========
     
     fromToCoords(map);
+    initOfferSearchFields(map);
     getUserLocation(map, google, markers);
 }

@@ -109,10 +109,11 @@ class Test extends Component{
                     </div>
                     <div className="bottom__info">
                         <p>
-                            Already registered? Please <a className="toggle-register"
-                                                             onClick={
-                                                                 this.props.toggleForms
-                                                             }>
+                            Already registered? Please 
+                            <a className="toggle-register"
+                                 onClick={
+                                     this.props.toggleForms
+                                 }>
                             login</a>
                         </p>
                     </div>

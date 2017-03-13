@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 import LoggedIn from './support/loggedIn'
 import LoggedOut from './support/loggedOut'
 import ActionsSwitcher from './support/actionsSwitcher'
-import store from './../store/store'
 
 class UserPanel extends Component {
     render() {
