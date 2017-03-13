@@ -12,7 +12,9 @@ class UserPanel extends Component {
         
         function checkIfLogged(isLogged) {
             if (isLogged === true) {
-                return <LoggedIn username='Eugene'/>
+                let username = JSON.parse(sessionStorage.getItem('userData')).name;
+                
+                return <LoggedIn username={username} />
             }   else {
                 return <LoggedOut />
             }

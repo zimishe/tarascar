@@ -8,8 +8,6 @@ import { removeFieldError } from './../actions/support/removeFieldError'
 export function validation(body) {
     let status = body.s;
     
-    console.log('bb', body);
-    
     if (status < 1) {
         let errors = body.errors;
         
@@ -39,11 +37,9 @@ export function validation(body) {
         removeFieldError(inputs, parent);
         
     }   else {
+        let data = body.user;
         
-        let data = {
-            id: 1,
-            name: 'Eugene'
-        };
+        console.log('data', data);
         
         let sessionData = JSON.stringify(data),
             offerButton = document.querySelector('.actions__switcher li:nth-last-of-type(1) a');
@@ -53,10 +49,10 @@ export function validation(body) {
         store.dispatch(login(true));
         
         let regForm = document.querySelector('.forms-modal'),
-            body = document.body;
+            bodyG = document.body;
         
         regForm.classList.remove('active');
-        body.classList.remove('active');
+        bodyG.classList.remove('active');
         offerButton.classList.remove('logged-out');
         
         // need to return username
