@@ -36,5 +36,5 @@ fs.readdirSync('./backend/controllers').forEach(function (file) {
 
 
 http.createServer(app).listen(config.get('port'),'',function(){
-    console.log('Express server listening on port ' + config.get('port'));
+    console.log('Express server listening on port 1+' + config.get('port'));
 });
