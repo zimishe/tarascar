@@ -3,7 +3,7 @@
  */
 
 import { changePlace } from './../changePlace'
-import { showRoute } from './../showRoute'
+import { driverShowRoute } from './../support/driverShowRoute'
 
 import store from './../../store/store'
 
@@ -15,10 +15,8 @@ export function initOfferSearchFields(map) {
 
     let fromField = document.getElementById('offer__from'),
         toField = document.getElementById('offer__to'),
-        wayPt = document.getElementsByClassName('waypoint')[0],
         offerFrom = new google.maps.places.SearchBox(fromField),
         offerTo = new google.maps.places.SearchBox(toField),
-        searchWayPt = new google.maps.places.SearchBox(wayPt),
         markers = [];
 
     google.maps.event.addListener(offerFrom, 'places_changed', function() {
@@ -86,4 +84,6 @@ export function initOfferSearchFields(map) {
             }
         });
     });
+
+    driverShowRoute(google, map);
 }

@@ -37,7 +37,7 @@ h2 {
     
     &__map {
         flex-basis: 70%;
-        height: 700px;
+        min-height: 700px;
     }
     
     &__sidebar {
@@ -218,19 +218,17 @@ h2 {
     }
     
     &__tab {
-        position: absolute;
         left: 0;
         top: 0;
         width: 100%;
         transition: opacity .2s ease;
-        opacity: 0;
+        display: none;
         
         &.active {
-            opacity: 1;
+            display: block;
         }
     }
 }
-
 
 .actions {
     &__switcher {
@@ -310,5 +308,66 @@ h2 {
     
     &__inputs {
         
+    }
+}
+
+.routes-list {
+    &__from,
+    &__to {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 20px;
+        
+        h3 {
+            font: rem(16px, 20px) $gotham-bold;
+            color: #000;
+            padding-right: 20px;
+            flex-basis: 100%;
+            display: flex;
+        }
+        
+        p {
+            flex-basis: 100%;
+            display: flex;
+            text-align: left;
+            font: rem(14px, 16px) $gotham-book;
+            color: #232323;
+        }
+    }
+}
+
+.single-route {
+    &__caption {
+        display: flex;
+        align-items: center;
+        
+        h2 {
+            font: rem(16px, 20px) $gotham-bold;
+            color: #094f73;
+            padding-bottom: 0;
+        }
+    }
+    
+    &__color {
+        width: 50px;
+        height: 4px;
+        display: block;
+        margin-left: 20px;
+    }
+    
+    &__text {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        
+        span {
+            font: rem(14px, 16px) $gotham-book;
+            color: #000;
+            
+            &:nth-last-of-type(1) {
+                padding-left: 15px;
+            }
+        }
     }
 }
