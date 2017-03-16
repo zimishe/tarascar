@@ -37,7 +37,6 @@ export function showRoute(google, map) {
         }
         
         if (points.length > 0) {
-            // console.log('pp', points);
             
             let request = {
                 origin: fromVal,
@@ -71,6 +70,4 @@ export function showRoute(google, map) {
             });
         }
     });
-    
-   
 }

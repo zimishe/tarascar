@@ -4,7 +4,11 @@
 
 const initialState = {
     markers: '',
-    isLogged: false
+    isLogged: false,
+    routes: {
+        routePoints: [],
+        offeredRoutes: []
+    }
 };
 
 export default initialState
