@@ -22,8 +22,8 @@ class PageRouter extends Component {
                         <Route path='find' component={SearchCar}/>
                         <Route path='offer' component={OfferCar}/>
                     </Route>
-                    <Route path='cabinet' component={UserCabinet} />
                 </Route>
+                <Route path='cabinet' component={UserCabinet} />
             </Router>
         ) 
     }

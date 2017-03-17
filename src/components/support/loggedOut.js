@@ -35,7 +35,11 @@ class LoggedOut extends Component {
                 let control = e.target;
                 
                 if (control.classList.contains('logged-out')) {
-                    openPopup();    
+                    e.preventDefault();
+                    let href = control.getAttribute('href');
+                    
+                    openPopup();
+                   
                 }   else {
                     
                     let tabs = document.querySelectorAll('.action__tab'),

@@ -17,7 +17,7 @@ class UserPanel extends Component {
                 
                 return <LoggedIn username={username} />
             }   else {
-                // return <LoggedOut />
+                return <LoggedOut />
             }
         }
 
