@@ -9,6 +9,10 @@ class ActionsSwitcher extends Component {
         
     }
     
+    someShit() {
+        console.log('sk');
+    }
+    
     render() {
         let isLogged = this.props.isLogged;
         // eslint-disable-next-line 

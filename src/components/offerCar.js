@@ -4,8 +4,18 @@
 
 import React, { Component } from 'react'
 import MapRoutes from './support/routes'
+import { initOfferSearchFields } from './../actions/support/initOfferSearchFields'
 
 class OfferCar extends Component {
+    componentDidMount() {
+        let map = window.map,
+            google = window.google;
+
+        if ((map !== null) && (google !== undefined)) {
+            initOfferSearchFields(map)
+        }
+    }
+    
     render() {
         return (
             <div className="offer-car__form__wrap">

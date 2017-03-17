@@ -16,11 +16,11 @@ export function initOfferSearchFields(map) {
     let fromField = document.getElementById('offer__from'),
         toField = document.getElementById('offer__to'),
         markers = [];
-
+    
     if ((fromField !== null) && (toField !== null)) {
         
-    let offerFrom = new google.maps.places.SearchBox(fromField),
-        offerTo = new google.maps.places.SearchBox(toField);
+        let offerFrom = new google.maps.places.SearchBox(fromField),
+            offerTo = new google.maps.places.SearchBox(toField);
 
         google.maps.event.addListener(offerFrom, 'places_changed', function() {
             let geocoder = new google.maps.Geocoder(),

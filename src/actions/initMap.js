@@ -17,6 +17,8 @@ export function initMap() {
         center: {lat: -34.397, lng: 150.644},
         zoom: 12
     });
+    
+    window.map = map;
 
     let input = document.getElementById('search'),
         searchBox = new google.maps.places.SearchBox(input);

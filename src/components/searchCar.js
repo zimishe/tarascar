@@ -5,6 +5,7 @@
 import React, { Component } from 'react'
 import store from './../store/store'
 import { connect } from 'react-redux'
+import { fromToCoords } from './../actions/support/fromToCoords'
 // eslint-disable-next-line
 import request from 'request'
 
@@ -32,6 +33,15 @@ const mapDispatchToProps = function(dispatch) {
 };
 
 class SearchCar extends Component {
+    componentDidMount() {
+        let map = window.map,
+            google = window.google;
+
+        if ((map !== null) && (google !== undefined)) {
+            fromToCoords(map);
+        }
+    }
+    
     render() {
         return (
 

@@ -38,7 +38,7 @@ export function validation(body) {
         removeFieldError(inputs, parent);
         
     }   else {
-        let data = body.user;
+        let data = body.user;   
         
         let sessionData = JSON.stringify(data),
             offerButton = document.querySelector('.actions__switcher li:nth-last-of-type(1) a');
