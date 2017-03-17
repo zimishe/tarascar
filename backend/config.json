@@ -10,6 +10,13 @@
     "password":"dell",
     "database":"tarascar"
   },
+  "mysql-prod": {
+    "host": "us-cdbr-iron-east-03.cleardb.net",
+    "user":"b434da1a3327f2",
+    "password":"f3e430e9",
+    "database":"heroku_01683770a6df783"
+  },
+
   "mail" : {
     "from":"no-reply@example.com",
     "host":"smtp.gmail.com",
