@@ -52,6 +52,7 @@ module.exports.controller = function (app) {
 
             var promise = new Promise(function (resolve, reject) {
                 trips.create(tripData,steps, function (e, result) {
+                    console.log(e,"error");
                     console.log(result,"here");
                 });
             });
