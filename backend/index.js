@@ -17,7 +17,7 @@ var mailConnect = require('./config/mailer');
 var mailerConnect = new mailConnect(app);
 app.set('title', 'BlaBla');
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(session({secret: '147896325'}));

@@ -68,8 +68,8 @@ export function driverShowRoute(google, map) {
                         
                         let legs = route.legs,
                             steps = route.legs[0].steps,
-                            startCoords = route.legs[0].start_location,
-                            endCoords = route.legs[0].end_location,
+                            startCoords = {lat:route.legs[0].start_location.lat(),lng:route.legs[0].start_location.lng()},
+                            endCoords = {lat:route.legs[0].end_location.lat(),lng:route.legs[0].end_location.lng()},
                             totalDistance = legs[0].distance.text,
                             totalDuration = legs[0].duration.text,
                             durationStamp = legs[0].duration.value,
@@ -95,7 +95,6 @@ export function driverShowRoute(google, map) {
                             totalDistance: totalDistance,
                             totalDuration: totalDuration
                         };
-                        
                         dataToSend = {
                             userID: userID,
                             startCoords: startCoords,
@@ -125,7 +124,7 @@ export function driverShowRoute(google, map) {
                     
                     store.dispatch(setRoutes(routesData));
 
-                    // console.log('dtSnd', dataToSend);
+                     console.log('dtSnd', dataToSend);
 
                     request({
                         uri: config.server+'/trip',

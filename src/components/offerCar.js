@@ -9,7 +9,7 @@ class OfferCar extends Component {
     render() {
         return (
             <div className="offer-car__form__wrap">
-                <form className="offer-car__form" id="offer_form">
+                <form className="offer-car__form" id="offer_form" method="post">
                     <h2>Створити поїздку</h2>
                     <div className="offer-car__inputs">
                         <h3>Шлях</h3>
