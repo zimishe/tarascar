@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import LoggedIn from './support/loggedIn'
+// eslint-disable-next-line 
 import LoggedOut from './support/loggedOut'
 import ActionsSwitcher from './support/actionsSwitcher'
 
@@ -16,7 +17,7 @@ class UserPanel extends Component {
                 
                 return <LoggedIn username={username} />
             }   else {
-                return <LoggedOut />
+                // return <LoggedOut />
             }
         }
 

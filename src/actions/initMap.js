@@ -12,7 +12,7 @@ export function initMap() {
     let map,
         google = window.google,
         markers = [];
-
+    
     map = new google.maps.Map(this.refs.map, {
         center: {lat: -34.397, lng: 150.644},
         zoom: 12

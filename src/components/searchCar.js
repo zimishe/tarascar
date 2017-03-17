@@ -27,8 +27,6 @@ const mapDispatchToProps = function(dispatch) {
             // }, function(error, response, body) {
             //     console.log(body);
             // });
-
-           
         }
     };
 };

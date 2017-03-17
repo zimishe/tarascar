@@ -3,28 +3,17 @@
  */
 
 import React, { Component } from 'react'
-import Search from './searchPlace'
-import SearchPlace from './searchCar'
-import OfferCar from './offerCar'
+import SearchPlace from './../components/searchPlace'
 
 class Sidebar extends Component {
     render() {
         return (
             <div className="gmap__sidebar">
-                <Search />
-                <div className="action__tabs">
-                    <div className="action__tab active" data-tab="find">
-                        <SearchPlace />
-                    </div>
-                    <div className="action__tab" data-tab="offer">
-                        <OfferCar />
-                    </div>
-                    
-                </div>
+                <SearchPlace />
+                {this.props.children}
             </div>
         )
     }
 }
-
 
 export default Sidebar
