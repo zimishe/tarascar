@@ -72,7 +72,7 @@ const mapDispatchToProps = function(dispatch) {
     };
 };
 
-class Test extends Component{
+class RegModals extends Component{
     render() {
         let registerAction = config.server+'/sign-up',
             loginAction = config.server+'/sign-in';
@@ -126,4 +126,4 @@ class Test extends Component{
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Test)
+)(RegModals)

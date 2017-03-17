@@ -4,6 +4,7 @@
 import store from './../store/store'
 import { login } from './login'
 import { removeFieldError } from './../actions/support/removeFieldError'
+import { browserHistory } from 'react-router'
 
 export function validation(body) {
     let status = body.s;
@@ -37,9 +38,7 @@ export function validation(body) {
         removeFieldError(inputs, parent);
         
     }   else {
-        let data = body.user;
-        
-        console.log('data', data);
+        let data = body.user;   
         
         let sessionData = JSON.stringify(data),
             offerButton = document.querySelector('.actions__switcher li:nth-last-of-type(1) a');
@@ -54,9 +53,11 @@ export function validation(body) {
         regForm.classList.remove('active');
         bodyG.classList.remove('active');
         offerButton.classList.remove('logged-out');
+
+        browserHistory.push('offer');
         
         // need to return username
-        console.log('success blyat');
+        // console.log('success blyat');
     }
 }
 

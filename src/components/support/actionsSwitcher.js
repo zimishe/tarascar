@@ -2,15 +2,20 @@
  * Created by eugene on 09.03.17.
  */
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 class ActionsSwitcher extends Component {
     componentDidMount() {
         
     }
     
+    someShit() {
+        console.log('sk');
+    }
+    
     render() {
         let isLogged = this.props.isLogged;
-        
+        // eslint-disable-next-line 
         function checkLogin() {
             if (isLogged !== true) {
                 return 'logged-out'
@@ -20,10 +25,10 @@ class ActionsSwitcher extends Component {
         return (
             <ul className="actions__switcher">
                 <li>
-                    <a data-tab="find" className="active">Знайти водія</a>
+                    <Link to="find">Знайти водія</Link>
                 </li>
                 <li>
-                    <a data-tab="offer" className={checkLogin()}>Запропонувати поїздку</a>
+                    <Link to="offer" className={checkLogin()}>Створити поїздку</Link>
                 </li>
             </ul>
         )

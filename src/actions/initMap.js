@@ -12,11 +12,13 @@ export function initMap() {
     let map,
         google = window.google,
         markers = [];
-
+    
     map = new google.maps.Map(this.refs.map, {
         center: {lat: -34.397, lng: 150.644},
         zoom: 12
     });
+    
+    window.map = map;
 
     let input = document.getElementById('search'),
         searchBox = new google.maps.places.SearchBox(input);

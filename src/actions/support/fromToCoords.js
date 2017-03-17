@@ -16,108 +16,111 @@ export function fromToCoords(map) {
     let placeFrom = document.getElementById('from'),
         placeTo = document.getElementById('to'),
         wayPt = document.getElementsByClassName('waypoint')[0],
-        searchFrom = new google.maps.places.SearchBox(placeFrom),
-        searchTo = new google.maps.places.SearchBox(placeTo),
-        searchWayPt = new google.maps.places.SearchBox(wayPt),
         markers = [];
+        
+    if ((placeFrom !== null) && (placeTo !== null)) {
+        let searchFrom = new google.maps.places.SearchBox(placeFrom),
+            searchTo = new google.maps.places.SearchBox(placeTo),
+            searchWayPt = new google.maps.places.SearchBox(wayPt);
 
-    google.maps.event.addListener(searchFrom, 'places_changed', function() {
-        let geocoder = new google.maps.Geocoder(),
-            address = placeFrom.value;
+        google.maps.event.addListener(searchFrom, 'places_changed', function() {
+            let geocoder = new google.maps.Geocoder(),
+                address = placeFrom.value;
 
-        geocoder.geocode({ 'address': address }, function (results, status) {
+            geocoder.geocode({ 'address': address }, function (results, status) {
 
-            if (status === google.maps.GeocoderStatus.OK) {
-                let latitude = results[0].geometry.location.lat(),
-                    longitude = results[0].geometry.location.lng();
+                if (status === google.maps.GeocoderStatus.OK) {
+                    let latitude = results[0].geometry.location.lat(),
+                        longitude = results[0].geometry.location.lng();
 
-                let coords = {
-                    lat: latitude,
-                    lng : longitude
-                };
+                    let coords = {
+                        lat: latitude,
+                        lng : longitude
+                    };
 
-                // eslint-disable-next-line
-                let markerFrom = new google.maps.Marker({
-                    position: coords,
-                    map: map,
-                    title: 'You are here',
-                    icon: IconFrom,
-                    animation: google.maps.Animation.DROP,
-                    draggable: true
-                });
+                    // eslint-disable-next-line
+                    let markerFrom = new google.maps.Marker({
+                        position: coords,
+                        map: map,
+                        title: 'You are here',
+                        icon: IconFrom,
+                        animation: google.maps.Animation.DROP,
+                        draggable: true
+                    });
 
-                markers.push(markerFrom);
-                store.dispatch(changePlace(markers));
-                markerFrom.setMap(map);
-                
-                map.setCenter(coords);
-            }
+                    markers.push(markerFrom);
+                    store.dispatch(changePlace(markers));
+                    markerFrom.setMap(map);
+
+                    map.setCenter(coords);
+                }
+            });
         });
-    });  
-    
-    google.maps.event.addListener(searchTo, 'places_changed', function() {
-        let geocoder = new google.maps.Geocoder(),
-            address = placeTo.value;
 
-        geocoder.geocode({ 'address': address }, function (results, status) {
+        google.maps.event.addListener(searchTo, 'places_changed', function() {
+            let geocoder = new google.maps.Geocoder(),
+                address = placeTo.value;
 
-            if (status === google.maps.GeocoderStatus.OK) {
-                let latitude = results[0].geometry.location.lat(),
-                    longitude = results[0].geometry.location.lng();
+            geocoder.geocode({ 'address': address }, function (results, status) {
 
-                let coords = {
-                    lat: latitude,
-                    lng : longitude
-                };
+                if (status === google.maps.GeocoderStatus.OK) {
+                    let latitude = results[0].geometry.location.lat(),
+                        longitude = results[0].geometry.location.lng();
 
-                // eslint-disable-next-line
-                let markerTo = new google.maps.Marker({
-                    position: coords,
-                    map: map,
-                    title: 'You are here',
-                    icon: IconTo,
-                    animation: google.maps.Animation.DROP,
-                    draggable: true
-                });
+                    let coords = {
+                        lat: latitude,
+                        lng : longitude
+                    };
 
-                markers.push(markerTo);
+                    // eslint-disable-next-line
+                    let markerTo = new google.maps.Marker({
+                        position: coords,
+                        map: map,
+                        title: 'You are here',
+                        icon: IconTo,
+                        animation: google.maps.Animation.DROP,
+                        draggable: true
+                    });
 
-                map.setCenter(coords);
-            }
+                    markers.push(markerTo);
+
+                    map.setCenter(coords);
+                }
+            });
         });
-    });
-    
-    google.maps.event.addListener(wayPt, 'places_changed', function() {
-        let geocoder = new google.maps.Geocoder(),
-            address = searchWayPt.value;
 
-        geocoder.geocode({ 'address': address }, function (results, status) {
+        google.maps.event.addListener(wayPt, 'places_changed', function() {
+            let geocoder = new google.maps.Geocoder(),
+                address = searchWayPt.value;
 
-            if (status === google.maps.GeocoderStatus.OK) {
-                let latitude = results[0].geometry.location.lat(),
-                    longitude = results[0].geometry.location.lng();
+            geocoder.geocode({ 'address': address }, function (results, status) {
 
-                let coords = {
-                    lat: latitude,
-                    lng : longitude
-                };
+                if (status === google.maps.GeocoderStatus.OK) {
+                    let latitude = results[0].geometry.location.lat(),
+                        longitude = results[0].geometry.location.lng();
 
-                // eslint-disable-next-line
-                let markerTo = new google.maps.Marker({
-                    position: coords,
-                    map: map,
-                    title: 'You are here',
-                    icon: IconTo,
-                    animation: google.maps.Animation.DROP,
-                    draggable: true
-                });
+                    let coords = {
+                        lat: latitude,
+                        lng : longitude
+                    };
 
-                // markers.push(markerTo);
+                    // eslint-disable-next-line
+                    let markerTo = new google.maps.Marker({
+                        position: coords,
+                        map: map,
+                        title: 'You are here',
+                        icon: IconTo,
+                        animation: google.maps.Animation.DROP,
+                        draggable: true
+                    });
 
-                // map.setCenter(coords);
-            }
+                    // markers.push(markerTo);
+
+                    // map.setCenter(coords);
+                }
+            });
         });
-    });
-    
-    showRoute(google, map);
+
+        showRoute(google, map);
+    }
 }

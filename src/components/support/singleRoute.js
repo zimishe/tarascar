@@ -2,7 +2,9 @@
  * Created by eugene on 16.03.17.
  */
 import React, { Component } from 'react'
+// eslint-disable-next-line 
 import store from './../../store/store'
+// eslint-disable-next-line 
 import { setRoutes } from './../../actions/setRoutes'
 
 class SingleRoute extends Component {
