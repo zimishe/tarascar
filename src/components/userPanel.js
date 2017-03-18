@@ -3,7 +3,9 @@
  */
 import React, { Component } from 'react'
 import LoggedIn from './support/loggedIn'
+// eslint-disable-next-line 
 import LoggedOut from './support/loggedOut'
+import ActionsSwitcher from './support/actionsSwitcher'
 
 class UserPanel extends Component {
     render() {
@@ -11,14 +13,26 @@ class UserPanel extends Component {
         
         function checkIfLogged(isLogged) {
             if (isLogged === true) {
-                return <LoggedIn username='Eugene'/>
+                let username = JSON.parse(sessionStorage.getItem('userData')).name;
+                
+                return <LoggedIn username={username} />
             }   else {
                 return <LoggedOut />
             }
         }
+
+        function setSidebarContent() {
+            let isLogged = sessionStorage.getItem('userData'),
+                data;
+
+            (isLogged !== null) ? data = true : data = false;
+
+            return <ActionsSwitcher isLogged={data} />
+        }
         
         return (
             <div className="user-panel">
+                {setSidebarContent()}    
                 {checkIfLogged(isLogged)}   
             </div>
         )

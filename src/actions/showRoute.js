@@ -37,7 +37,6 @@ export function showRoute(google, map) {
         }
         
         if (points.length > 0) {
-            // console.log('pp', points);
             
             let request = {
                 origin: fromVal,
@@ -53,8 +52,7 @@ export function showRoute(google, map) {
                     // console.log('r', result);
 
                     let route = result.routes[0].legs[0],
-                        markersArr = [],
-                        routeLegs = result.routes[0].legs[0].steps;
+                        markersArr = [];
                     
                     // проставляем маркеры по всему маршруту с описанием изменения маршрута
                     for (let i = 0, length = route.steps.length; i < length; i++) {
@@ -72,6 +70,4 @@ export function showRoute(google, map) {
             });
         }
     });
-    
-   
 }

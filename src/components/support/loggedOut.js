@@ -8,16 +8,58 @@ class LoggedOut extends Component {
     componentDidMount() {
         function showRegisterPopup() {
             let link = document.querySelector('.log-in__link'),
-                registerForm = document.querySelector('#registration');
+                switcher = document.querySelector('.actions__switcher'),
+                controls = document.querySelectorAll('.actions__switcher li a'),
+                formModal = document.querySelector('.forms-modal'),
+                body = document.body,
+                closeButton = document.querySelector('.close-reg-modal');
+            
+            function openPopup() {
+                formModal.classList.toggle('active');
+                body.classList.add('active');
+            }
             
             if (link !== null) {
-                // console.log('here');
-                
                 link.onclick = (e) => {
                     e.preventDefault();
-                    registerForm.classList.toggle('active');
+                    openPopup();
+                };
+                
+                closeButton.onclick = () => {
+                    body.classList.remove('active');
+                    formModal.classList.remove('active');
                 }
             }
+        
+            switcher.onclick = (e) => {
+                let control = e.target;
+                
+                if (control.classList.contains('logged-out')) {
+                    e.preventDefault();
+                    let href = control.getAttribute('href');
+                    
+                    openPopup();
+                   
+                }   else {
+                    
+                    let tabs = document.querySelectorAll('.action__tab'),
+                        controlData = control.getAttribute('data-tab');
+
+                    controls.forEach((c) => {c.classList.remove('active')});
+                    control.classList.add('active');
+
+                    tabs.forEach((tab) => {
+                        let tabData = tab.getAttribute('data-tab');
+
+                        if (controlData === tabData) {
+                            tabs.forEach((t) => {t.classList.remove('active')});
+                            tab.classList.add('active')
+                        }
+                    })
+                    
+                }
+            };
+            
         }
 
         showRegisterPopup();

@@ -3,19 +3,31 @@
  */
 import App from './../App'
 import UserCabinet from './../components/userCabinet'
+import Sidebar from './../components/sidebar'
+import SearchCar from './searchCar'
+import OfferCar from './offerCar'
+import Map from './map'
 
 import React, { Component } from 'react'
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 class PageRouter extends Component {
     render() {
         return(
             <Router history={browserHistory}>
-                <Route path='/' component={App} />
-                <Route path='/cabinet' component={UserCabinet} />
+                <Route component={App} path='/'>
+                    <Route component={Map}/>
+                    <Route component={Sidebar}>
+                        <IndexRoute component={SearchCar}/>
+                        <Route path='find' component={SearchCar}/>
+                        <Route path='offer' component={OfferCar}/>
+                    </Route>
+                </Route>
+                <Route path='cabinet' component={UserCabinet} />
             </Router>
-        )
+        ) 
     }
 }
+
 
 export default PageRouter

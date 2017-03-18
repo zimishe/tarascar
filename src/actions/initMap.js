@@ -6,16 +6,19 @@ import { fromToCoords } from './../actions/support/fromToCoords'
 // eslint-disable-next-line
 import { showPlaces } from './showPlaces'
 import Icon from './../../assets/img/morty.png'
+import { initOfferSearchFields } from './support/initOfferSearchFields'
 
 export function initMap() {
     let map,
         google = window.google,
         markers = [];
-
+    
     map = new google.maps.Map(this.refs.map, {
         center: {lat: -34.397, lng: 150.644},
         zoom: 12
     });
+    
+    window.map = map;
 
     let input = document.getElementById('search'),
         searchBox = new google.maps.places.SearchBox(input);
@@ -52,5 +55,6 @@ export function initMap() {
     //  ==========
     
     fromToCoords(map);
+    initOfferSearchFields(map);
     getUserLocation(map, google, markers);
 }

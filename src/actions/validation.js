@@ -4,6 +4,7 @@
 import store from './../store/store'
 import { login } from './login'
 import { removeFieldError } from './../actions/support/removeFieldError'
+import { browserHistory } from 'react-router'
 
 export function validation(body) {
     let status = body.s;
@@ -11,9 +12,9 @@ export function validation(body) {
     if (status < 1) {
         let errors = body.errors;
         
-        let parent = document.querySelector('#reg_inputs'),
-            errorTip = document.querySelectorAll('.error__tip'),
-            inputs = document.querySelectorAll('#reg_inputs input');
+        let parent = document.querySelector('.car__search.active .reg_inputs'),
+            errorTip = document.querySelectorAll('.car__search.active .reg_inputs .error__tip'),
+            inputs = document.querySelectorAll('.car__search.active .reg_inputs input');
         
         errorTip.forEach((el) => {
             parent.removeChild(el)
@@ -23,7 +24,7 @@ export function validation(body) {
             let name = el.param,
                 message = el.msg;
             
-            let field = document.querySelector('input[name='+name+']');
+            let field = document.querySelector('.car__search.active .reg_inputs input[name='+name+']');
             
             let par = document.createElement('p');
             
@@ -37,14 +38,26 @@ export function validation(body) {
         removeFieldError(inputs, parent);
         
     }   else {
+        let data = body.user;   
+        
+        let sessionData = JSON.stringify(data),
+            offerButton = document.querySelector('.actions__switcher li:nth-last-of-type(1) a');
+        
+        sessionStorage.setItem('userData', sessionData);
+        
         store.dispatch(login(true));
         
-        let regForm = document.querySelector('#registration');
+        let regForm = document.querySelector('.forms-modal'),
+            bodyG = document.body;
         
         regForm.classList.remove('active');
+        bodyG.classList.remove('active');
+        offerButton.classList.remove('logged-out');
+
+        browserHistory.push('offer');
         
         // need to return username
-        console.log('success blyat');
+        // console.log('success blyat');
     }
 }
 

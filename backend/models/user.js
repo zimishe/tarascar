@@ -10,9 +10,9 @@ var User = function (data) {
 User.prototype.data = {}
 
 exports.create = function(data, done) {
-    var values = [data.name, data.surname, data.email, data.password];
+    var values = [data.name, data.surname, data.email, data.password,new Date()];
 
-    db.get().query('INSERT INTO users (name, surname, email, password) VALUES(?, ?, ?, ?)', values, function(err, result) {
+    db.get().query('INSERT INTO users (name, surname, email, password,created) VALUES(?, ?, ?, ?,?)', values, function(err, result) {
         if (err) return done(err);
         done(null, result.insertId)
     })
