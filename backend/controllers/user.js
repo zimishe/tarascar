@@ -133,6 +133,7 @@ module.exports.controller = function (app) {
                             login(req,id,res,function(){
                                 console.log("user login");
                             });
+                            res.json({s: s, errors: errors,user:response});
                             console.log(response, "success");
                         }
                     });
@@ -150,8 +151,7 @@ module.exports.controller = function (app) {
                     // });
                 }
 
-                res.json({s: s, errors: errors});
-                return res.sendStatus(200);
+                // return res.sendStatus(200);
             });
         }
     })

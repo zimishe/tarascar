@@ -3,6 +3,7 @@
  */
 var winston = require('winston');
 var express = require('express');
+var polyline = require('polyline');
 
 var trips = require('../models/trips');
 var expressValidator = require('express-validator'),bodyParser = require('body-parser');
@@ -10,6 +11,7 @@ var expressValidator = require('express-validator'),bodyParser = require('body-p
 mailer = require('express-mailer');
 
 module.exports.controller = function (app) {
+    // console.log(polyline.decode('yy}mHs`hsCEFg@n@a@`@GNELGVCVAR?Z?\@`@Bt@Bl@@X'));
     app.use(expressValidator());
 
     app.post('/trip', function (req, res) {
@@ -18,11 +20,12 @@ module.exports.controller = function (app) {
         var errors = [{}];
         var data = req.body;
         var s = 0;
-        //console.log(data);
+        // console.log(data);
         req.checkBody("startText", "Enter start point").notEmpty();
         req.checkBody("endText", "Enter finish point").notEmpty();
         req.checkBody("formPrice", "Enter price per one person").notEmpty();
         req.checkBody("formPlacesCount", "Enter quantity of place").notEmpty();
+        req.checkBody("startTime", "Enter quantity of place").notEmpty();
 
         errors = req.validationErrors();
 
@@ -31,12 +34,14 @@ module.exports.controller = function (app) {
             return false;
         } else {
             var steps = [];
+            var polylineArr = [];
             data.steps.forEach(function(val,index,arr){
-                steps.push(arr[index].polyline.points);
+                polylineArr.push(arr[index].polyline.points);
+                steps.push(arr[index].encoded_lat_lngs);
             });
-
+            // console.log(steps);
             var tripData = {
-              ownerId:data.userID,
+              owner_id:data.userID,
               start_point_lat:data.startCoords.lat,
               start_point_lng:data.startCoords.lng,
               end_point_lat:data.endCoords.lat,
@@ -51,15 +56,24 @@ module.exports.controller = function (app) {
             };
 
             var promise = new Promise(function (resolve, reject) {
-                trips.create(tripData,steps, function (e, result) {
-                    console.log(e,"error");
-                    console.log(result,"here");
+                trips.create(tripData,steps,polylineArr, function (e, result) {
+                    if (e != null) {
+                        console.log(e);
+                    } else {
+                        resolve(result);
+                    }
                 });
             });
 
-            //console.log(steps);
+            promise.then(function (id) {
+                console.log(id);
+               if(id>0) {
+                   s = 1;
+               }
+
+                return res.json({s: s, errors: errors});
+            });
         }
-        return res.json({s: s, errors: errors});
         //return res.sendStatus(200);
 
     });

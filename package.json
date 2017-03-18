@@ -27,11 +27,12 @@
     "gulp-watch": "^4.3.11",
     "jade": "1.11.0",
     "joi": "^9.2.0",
-    "js-md5": "^0.4.2",
+    "js-md5": "0.4.2",
     "morgan": "^1.8.1",
     "mysql": ">=2.5.0",
     "nconf": "^0.8.4",
     "nodemon": "^1.11.0",
+    "polyline": "^0.2.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
@@ -41,8 +42,7 @@
     "resource-routing": "^0.1.0",
     "spawn-sync": "^1.0.15",
     "swig": "^1.4.2",
-    "winston": "2.3.1",
-    "js-md5":"0.4.2"
+    "winston": "2.3.1"
   },
   "scripts": {
     "start": "react-scripts start & nodemon backend/index.js",
