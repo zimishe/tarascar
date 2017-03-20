@@ -19,6 +19,7 @@ class LoggedIn extends Component {
     }
     
     render() {
+        // console.log('tp', this.props);
         let username = this.props.username;
         
         return (

@@ -36,7 +36,6 @@ class LoggedOut extends Component {
                 
                 if (control.classList.contains('logged-out')) {
                     e.preventDefault();
-                    let href = control.getAttribute('href');
                     
                     openPopup();
                    
@@ -59,7 +58,6 @@ class LoggedOut extends Component {
                     
                 }
             };
-            
         }
 
         showRegisterPopup();

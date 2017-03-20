@@ -9,12 +9,24 @@ import { connect } from 'react-redux'
 import { setRoutes } from './../../actions/setRoutes'
 import SingleRoute from './singleRoute'
 
-
 const mapDispatchToProps = function(dispatch) {
     return {
         dispatch,
-        createOffer: (event) => {
-            event.preventDefault();
+        chooseRoute: (routeID, route) => {
+            let offeredRoutes = route.offeredRoutes,
+                map = window.map;
+
+            if (offeredRoutes.length > 0) {
+                offeredRoutes.forEach((el) => {
+                    el.directionDisplay.setMap(null)
+                });
+                
+                let chosen = offeredRoutes.filter((el, i) => i === routeID );
+                
+                console.log('ccc', chosen);
+                
+                offeredRoutes[routeID].directionDisplay.setMap(map);
+            }
         },
     };
 };
@@ -28,11 +40,15 @@ const mapStateToProps = function() {
 };
 
 class MapRoutes extends Component {
+    componentDidMount() {
+       
+    }
     
     render() {
         let mapRoutes = this.props.data.routes.offeredRoutes,
             routeFrom = this.props.data.routes.routePoints.start,
-            routeTo = this.props.data.routes.routePoints.end;
+            routeTo = this.props.data.routes.routePoints.end,
+            routes = this.props.data.routes;
         
         return (
             <div className="routes-list">
@@ -51,6 +67,8 @@ class MapRoutes extends Component {
                         totalDuration={el.totalDuration}
                         routeId={el.routeId}
                         routeColor={el.routeColor}
+                        routes={routes}
+                        chooseRoute={this.props.chooseRoute}
                     />
                 )}
             </div>

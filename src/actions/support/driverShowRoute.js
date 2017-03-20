@@ -76,21 +76,8 @@ export function driverShowRoute(google, map) {
                                 durationStamp = legs[0].duration.value,
                                 userID = JSON.parse(sessionStorage.getItem('userData')).id;
 
-                            // function getFormattedTime(totalDuration) {
-                            //     if (totalDuration >= 3600) {
-                            //         return {
-                            //             hrs: Math.ceil((totalDuration/3600)),
-                            //             mins: Math.ceil((totalDuration%3600)/60)
-                            //         }
-                            //     }   else {
-                            //         return {
-                            //             hrs: 0,
-                            //             mins: Math.ceil((totalDuration%3600)/60)
-                            //         }
-                            //     }
-                            // }
-
                             let dataToStorage = {
+                                directionDisplay: directionsDisplay,
                                 routeId: directionsDisplay.routeIndex,
                                 routeColor: directionsDisplay.polylineOptions.strokeColor,
                                 totalDistance: totalDistance,
@@ -106,18 +93,16 @@ export function driverShowRoute(google, map) {
                                 steps: steps,
                                 durationStamp: durationStamp
                             };
-
+                            
                             offeredRoutes.push(dataToStorage);
-
-                            directionsDisplay.addListener('directions_changed', function() {
-                                console.log('changed');
-                            });
                         });
 
                         let routesData = {
                             routePoints: routePoints,
                             offeredRoutes: offeredRoutes
                         };
+
+                        console.log('oR', routesData);
 
                         dataToSend.formPrice = document.querySelector('#offer__price').value;
                         dataToSend.formPlacesCount = document.querySelector('#offer__places__count').value;
@@ -126,16 +111,18 @@ export function driverShowRoute(google, map) {
 
                         store.dispatch(setRoutes(routesData));
 
-                        // console.log('dtSnd', dataToSend);
+                        // console.log('rdata', routesData);
 
-                        request({
-                            uri: config.server+'/trip',
-                            method: "post",
-                            form: dataToSend
-                        }, function(error, response, body) {
-                            console.log('r', response);
-                        });
+                        // request({
+                        //     uri: config.server+'/trip',
+                        //     method: "post",
+                        //     form: dataToSend
+                        // }, function(error, response, body) {
+                        //     console.log('r', response);
+                        // });
                     }
+                    
+                    
                 });
             }
         });

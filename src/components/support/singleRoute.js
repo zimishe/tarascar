@@ -15,6 +15,7 @@ class SingleRoute extends Component {
         
         return (
             <label className="single-route">
+                <input type="radio" name="single_route" onChange={this.props.chooseRoute.bind(this, this.props.routeId, this.props.routes)}/>
                 <span className="single-route__caption">
                     <h2>Варіант {this.props.routeId + 1}</h2>
                     <span className="single-route__color" style={style} />

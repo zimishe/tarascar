@@ -11,7 +11,7 @@ var expressValidator = require('express-validator'),bodyParser = require('body-p
 mailer = require('express-mailer');
 
 module.exports.controller = function (app) {
-    // console.log(polyline.decode('yy}mHs`hsCEFg@n@a@`@GNELGVCVAR?Z?\@`@Bt@Bl@@X'));
+    // console.log(polyline.decode('eh{rHg{lyDEd@AJC`@KdDCt@Cl@A`@Cd@A\AZCPARCLEX'));
     app.use(expressValidator());
 
     app.post('/trip', function (req, res) {
