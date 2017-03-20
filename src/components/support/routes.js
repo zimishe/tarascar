@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 // eslint-disable-next-line 
 import { setRoutes } from './../../actions/setRoutes'
 import SingleRoute from './singleRoute'
+import { setFinalRoute } from './../../actions/setFinalRoute'
 
 const mapDispatchToProps = function(dispatch) {
     return {
@@ -23,7 +24,9 @@ const mapDispatchToProps = function(dispatch) {
                 
                 let chosen = offeredRoutes.filter((el, i) => i === routeID );
                 
-                console.log('ccc', chosen);
+                // console.log('ccc', chosen);
+                
+                store.dispatch(setFinalRoute(chosen));
                 
                 offeredRoutes[routeID].directionDisplay.setMap(map);
             }

@@ -52,57 +52,60 @@ export function driverShowRoute(google, map) {
                         };
 
                         let offeredRoutes = [];
+                        
+                        let data = store.getState();
+                        
+                        if (data.finalRoute == '') {
+                            result.routes.forEach((route, i) => {
+                                let directionsDisplay = new google.maps.DirectionsRenderer({
+                                    map: map,
+                                    suppressMarkers: true,
+                                    directions: result,
+                                    draggable: true,
+                                    routeIndex: i,
+                                    polylineOptions: {
+                                        strokeColor: colors[i]
+                                    }
+                                });
 
-                        result.routes.forEach((route, i) => {
-                            let directionsDisplay = new google.maps.DirectionsRenderer({
-                                map: map,
-                                suppressMarkers: true,
-                                directions: result,
-                                draggable: true,
-                                routeIndex: i,
-                                polylineOptions: {
-                                    strokeColor: colors[i]
-                                }
+                                // console.log('rr', route);
+
+                                let legs = route.legs,
+                                    steps = route.legs[0].steps,
+                                    startCoords = {lat:route.legs[0].start_location.lat(),lng:route.legs[0].start_location.lng()},
+                                    endCoords = {lat:route.legs[0].end_location.lat(),lng:route.legs[0].end_location.lng()},
+                                    totalDistance = legs[0].distance.text,
+                                    totalDuration = legs[0].duration.text,
+                                    durationStamp = legs[0].duration.value,
+                                    userID = JSON.parse(sessionStorage.getItem('userData')).id;
+
+                                let dataToStorage = {
+                                    directionDisplay: directionsDisplay,
+                                    routeId: directionsDisplay.routeIndex,
+                                    routeColor: directionsDisplay.polylineOptions.strokeColor,
+                                    totalDistance: totalDistance,
+                                    totalDuration: totalDuration,
+                                    steps: steps
+                                };
+
+                                dataToSend = {
+                                    userID: userID,
+                                    startCoords: startCoords,
+                                    startText: result.request.origin,
+                                    endCoords: endCoords,
+                                    endText : result.request.destination,
+                                    // steps: steps,
+                                    durationStamp: durationStamp
+                                };
+
+                                offeredRoutes.push(dataToStorage);
                             });
-
-                            // console.log('rr', route);
-
-                            let legs = route.legs,
-                                steps = route.legs[0].steps,
-                                startCoords = {lat:route.legs[0].start_location.lat(),lng:route.legs[0].start_location.lng()},
-                                endCoords = {lat:route.legs[0].end_location.lat(),lng:route.legs[0].end_location.lng()},
-                                totalDistance = legs[0].distance.text,
-                                totalDuration = legs[0].duration.text,
-                                durationStamp = legs[0].duration.value,
-                                userID = JSON.parse(sessionStorage.getItem('userData')).id;
-
-                            let dataToStorage = {
-                                directionDisplay: directionsDisplay,
-                                routeId: directionsDisplay.routeIndex,
-                                routeColor: directionsDisplay.polylineOptions.strokeColor,
-                                totalDistance: totalDistance,
-                                totalDuration: totalDuration
-                            };
-
-                            dataToSend = {
-                                userID: userID,
-                                startCoords: startCoords,
-                                startText: result.request.origin,
-                                endCoords: endCoords,
-                                endText : result.request.destination,
-                                steps: steps,
-                                durationStamp: durationStamp
-                            };
-                            
-                            offeredRoutes.push(dataToStorage);
-                        });
-
+                        }
+                        
                         let routesData = {
                             routePoints: routePoints,
                             offeredRoutes: offeredRoutes
                         };
-
-                        console.log('oR', routesData);
 
                         dataToSend.formPrice = document.querySelector('#offer__price').value;
                         dataToSend.formPlacesCount = document.querySelector('#offer__places__count').value;
@@ -111,18 +114,31 @@ export function driverShowRoute(google, map) {
 
                         store.dispatch(setRoutes(routesData));
 
-                        // console.log('rdata', routesData);
+                        if (data.finalRoute !== '') {
+                            let stepsToSend = [];
 
-                        // request({
-                        //     uri: config.server+'/trip',
-                        //     method: "post",
-                        //     form: dataToSend
-                        // }, function(error, response, body) {
-                        //     console.log('r', response);
-                        // });
+                            data.finalRoute[0].steps.forEach((el) => {
+                                let stepCoord = {
+                                    lat: el.start_point.lat(),
+                                    lng: el.start_point.lng()
+                                };
+
+                                stepsToSend.push(stepCoord);
+                            });
+
+                            dataToSend.steps = stepsToSend;
+                            
+                            console.log('ds', dataToSend);
+
+                            request({
+                                uri: config.server+'/trip',
+                                method: "post",
+                                form: dataToSend
+                            }, function(error, response, body) {
+                                console.log('r', response);
+                            });
+                        }
                     }
-                    
-                    
                 });
             }
         });

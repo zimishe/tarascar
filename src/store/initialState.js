@@ -8,7 +8,8 @@ const initialState = {
     routes: {
         routePoints: [],
         offeredRoutes: []
-    }
+    },
+    finalRoute: ''
 };
 
 export default initialState
