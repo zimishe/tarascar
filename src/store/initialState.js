@@ -9,7 +9,8 @@ const initialState = {
         routePoints: [],
         offeredRoutes: []
     },
-    finalRoute: ''
+    finalRoute: '',
+    coordsToSearch: ''
 };
 
 export default initialState

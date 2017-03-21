@@ -6,6 +6,7 @@ import store from './../../store/store'
 
 import { changePlace } from './../changePlace'
 import { showRoute } from './../showRoute'
+import { setPathToSearch } from './../setPathToSearch'
 
 import IconFrom from './../../../assets/img/from.png'
 import IconTo from './../../../assets/img/to.png'
@@ -21,7 +22,8 @@ export function fromToCoords(map) {
     if ((placeFrom !== null) && (placeTo !== null)) {
         let searchFrom = new google.maps.places.SearchBox(placeFrom),
             searchTo = new google.maps.places.SearchBox(placeTo),
-            searchWayPt = new google.maps.places.SearchBox(wayPt);
+            searchWayPt = new google.maps.places.SearchBox(wayPt),
+            coordsToSearch = {};
 
         google.maps.event.addListener(searchFrom, 'places_changed', function() {
             let geocoder = new google.maps.Geocoder(),
@@ -49,10 +51,12 @@ export function fromToCoords(map) {
                     });
 
                     markers.push(markerFrom);
-                    store.dispatch(changePlace(markers));
+                    // store.dispatch(changePlace(markers));
                     markerFrom.setMap(map);
 
                     map.setCenter(coords);
+                    
+                    coordsToSearch.from = coords;
                 }
             });
         });
@@ -83,8 +87,9 @@ export function fromToCoords(map) {
                     });
 
                     markers.push(markerTo);
-
                     map.setCenter(coords);
+
+                    coordsToSearch.to = coords;
                 }
             });
         });
@@ -120,6 +125,8 @@ export function fromToCoords(map) {
                 }
             });
         });
+        
+        store.dispatch(setPathToSearch(coordsToSearch));
 
         showRoute(google, map);
     }
