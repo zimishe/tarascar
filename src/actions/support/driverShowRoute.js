@@ -46,7 +46,7 @@ export function driverShowRoute(google, map) {
                         
                         let data = store.getState();
                         
-                        if (data.finalRoute == '') {
+                        if (data.finalRoute === '') {
                             result.routes.forEach((route, i) => {
                                 let directionsDisplay = new google.maps.DirectionsRenderer({
                                     map: map,
@@ -125,13 +125,13 @@ export function driverShowRoute(google, map) {
                             
                             console.log('ds', dataToSend);
 
-                            // request({
-                            //     uri: config.server+'/trip',
-                            //     method: "post",
-                            //     form: dataToSend
-                            // }, function(error, response, body) {
-                            //     console.log('r', response);
-                            // });
+                            request({
+                                uri: config.server+'/trip',
+                                method: "post",
+                                form: dataToSend
+                            }, function(error, response, body) {
+                                console.log('r', response);
+                            });
                         }
                     }
                 });
