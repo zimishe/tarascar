@@ -8,6 +8,7 @@ import store from './../../store/store'
 import { setRoutes } from './../../actions/setRoutes'
 import request from 'request'
 import config from './../../config'
+import { setFinalRoute } from './../../actions/setFinalRoute'
 
 export function driverShowRoute(google, map) {
     let directionsService = new google.maps.DirectionsService();
@@ -25,17 +26,7 @@ export function driverShowRoute(google, map) {
                 toVal = document.querySelector('#offer__to').value;
 
             if(fromVal !== '' && toVal !== '' && points.length < 2) {
-                // let pointsArray = document.getElementsByClassName('waypoint');
-                //
-                // for (let i = 0; i < pointsArray.length; i++) {
-                //     if (pointsArray.value !== '') {
-                //         points.push({
-                //             location: pointsArray[i].value,
-                //             stopover: true
-                //         });
-                //     }
-                // }
-
+                
                 let directionsRequest = {
                     origin: fromVal,
                     destination: toVal,
@@ -98,6 +89,10 @@ export function driverShowRoute(google, map) {
                                     durationStamp: durationStamp
                                 };
 
+                                directionsDisplay.addListener('directions_changed', function() {
+                                    dataToStorage.steps = directionsDisplay.getDirections().routes[0].legs[0].steps;
+                                });
+
                                 offeredRoutes.push(dataToStorage);
                             });
                         }
@@ -130,13 +125,13 @@ export function driverShowRoute(google, map) {
                             
                             console.log('ds', dataToSend);
 
-                            request({
-                                uri: config.server+'/trip',
-                                method: "post",
-                                form: dataToSend
-                            }, function(error, response, body) {
-                                console.log('r', response);
-                            });
+                            // request({
+                            //     uri: config.server+'/trip',
+                            //     method: "post",
+                            //     form: dataToSend
+                            // }, function(error, response, body) {
+                            //     console.log('r', response);
+                            // });
                         }
                     }
                 });

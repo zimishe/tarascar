@@ -6,12 +6,13 @@ import React, { Component } from 'react'
 import MapRoutes from './support/routes'
 import { initOfferSearchFields } from './../actions/support/initOfferSearchFields'
 import store from './../store/store'
+import Datetime from 'react-datetime'
 
 class OfferCar extends Component {
     componentDidMount() {
         let map = window.map,
             google = window.google;
-            
+        
         if ((map !== null) && (google !== undefined)) {
             initOfferSearchFields(map)
         }
@@ -27,6 +28,18 @@ class OfferCar extends Component {
             }
         }
         
+        let inputFromProps = {
+            placeholder : 'Час відправлення',
+            name: 'offer__start__time',
+            required: 'required',
+            id: 'offer__start__time'
+        },
+            inputToProps = {
+                placeholder : 'Час прибуття',
+                name: 'offer__end__time',
+                id: 'offer__end__time'
+        };
+        
         return (
             <div className="offer-car__form__wrap">
                 <form className="offer-car__form" id="offer_form" method="post">
@@ -39,8 +52,8 @@ class OfferCar extends Component {
                         <input type="number" id="offer__price" name="offer__price" placeholder="Ціна" required/>
                         <input type="number" id="offer__places__count" name="offer__places__count" placeholder="К-ть місць" required />
                         <h3>Час</h3>
-                        <input type="text" id="offer__start__time" name="offer__start__time" placeholder="Час відправлення" required />
-                        <input type="text" id="offer__end__time" name="offer__end__time" placeholder="Час прибуття"/>
+                        <Datetime inputProps={inputFromProps}/>
+                        <Datetime inputProps={inputToProps}/>
                         {checkRoutes()}
                         <button className="btn btn__submit">Створити</button>
                     </div>
