@@ -13,7 +13,7 @@ import { setFinalRoute } from './../../actions/setFinalRoute'
 const mapDispatchToProps = function(dispatch) {
     return {
         dispatch,
-        chooseRoute: (routeID, route) => {
+        chooseRoute: (routeID, route, event) => {
             let offeredRoutes = route.offeredRoutes,
                 map = window.map;
 
@@ -23,8 +23,6 @@ const mapDispatchToProps = function(dispatch) {
                 });
                 
                 let chosen = offeredRoutes.filter((el, i) => i === routeID );
-                
-                // console.log('ccc', chosen);
                 
                 store.dispatch(setFinalRoute(chosen));
                 
@@ -63,17 +61,19 @@ class MapRoutes extends Component {
                     <h3>до:</h3>
                     <p>{routeTo}</p>
                 </div>
-                {mapRoutes.map((el, i) => 
-                    <SingleRoute 
-                        key={i} 
-                        totalDistance={el.totalDistance}
-                        totalDuration={el.totalDuration}
-                        routeId={el.routeId}
-                        routeColor={el.routeColor}
-                        routes={routes}
-                        chooseRoute={this.props.chooseRoute}
-                    />
-                )}
+                <div className="single-routes">
+                    {mapRoutes.map((el, i) =>
+                        <SingleRoute
+                            key={i}
+                            totalDistance={el.totalDistance}
+                            totalDuration={el.totalDuration}
+                            routeId={el.routeId}
+                            routeColor={el.routeColor}
+                            routes={routes}
+                            chooseRoute={this.props.chooseRoute}
+                        />
+                    )}
+                </div>
             </div>
         )
     }

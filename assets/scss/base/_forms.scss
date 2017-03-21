@@ -1,0 +1,22 @@
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease;
+    height: 40px;
+    
+    &:hover {
+        cursor: pointer;
+    }
+    
+    &__submit {
+        width: 100%;
+        font: rem(14px, 14px) $gotham-bold;
+        color: #fff;
+        background: #66BB6A;
+        
+        &:hover {
+            background: #43A047;
+        }
+    }
+}

@@ -25,13 +25,13 @@ const mapDispatchToProps = function(dispatch) {
             
             let dataToSend = store.getState().coordsToSearch;
             
-            request({
-                uri: config.server+'/search',
-                method: "post",
-                form: dataToSend
-            }, function(error, response, body) {
-
-            });
+            // request({
+            //     uri: config.server+'/search',
+            //     method: "post",
+            //     form: dataToSend
+            // }, function(error, response, body) {
+            //
+            // });
         }
     };
 };

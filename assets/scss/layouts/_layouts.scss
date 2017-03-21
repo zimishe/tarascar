@@ -278,7 +278,7 @@ h2 {
     &__form {
         margin-top: 20px;
 
-        input {
+        input:not([type="radio"]) {
             @include placeholder();
             height: 40px;
             width: 100%;
@@ -312,6 +312,8 @@ h2 {
 }
 
 .routes-list {
+    margin-bottom: 30px;
+    
     &__from,
     &__to {
         display: flex;
@@ -338,8 +340,39 @@ h2 {
 }
 
 .single-route {
+    display: flex;
+    margin-bottom: 5px;
+    min-height: 30px;
+    justify-content: flex-end;
+    transition: all .2s ease;
+    transform: translate(0, 0);
+    
+    &:hover {
+        cursor: pointer;
+        transform: translate(-10px, 0);
+    }
+    
+    &:nth-last-of-type(1) {
+        margin-bottom: 0;
+    }
+    
+    input[type="radio"] {
+        display: none;
+        
+        &:checked {
+            & + .single-route__caption {
+                & + .single-route__text {
+                    .single-route__text__mask {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    
     &__caption {
         display: flex;
+        flex-basis: 10%;
         align-items: center;
         
         h2 {
@@ -350,24 +383,41 @@ h2 {
     }
     
     &__color {
-        width: 50px;
-        height: 4px;
-        display: block;
-        margin-left: 20px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     &__text {
         display: flex;
+        flex-basis: 70%;
         align-items: center;
-        margin-bottom: 20px;
+        padding: 0 10px;
+        border-width: 1px;
+        border-style: solid;
+        position: relative;
         
         span {
-            font: rem(14px, 16px) $gotham-book;
+            display: flex;
+            font: rem(14px, 12px) $gotham-book;
             color: #000;
+            position: relative;
             
             &:nth-last-of-type(1) {
-                padding-left: 15px;
+                padding-left: 5px;
             }
+        }
+
+        &__mask {
+            position: absolute !important;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            transition: all .2s ease-out;
+            border-left: 1px solid #fff;
         }
     }
 }
