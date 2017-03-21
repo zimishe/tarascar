@@ -11,19 +11,26 @@ class SingleRoute extends Component {
     render() {
         let style = {
             backgroundColor: this.props.routeColor
+        },
+        borderColor = {
+            borderColor: this.props.routeColor
         };
         
         return (
             <label className="single-route">
-                <input type="radio" name="single_route" onChange={this.props.chooseRoute.bind(this, this.props.routeId, this.props.routes)}/>
+                <input type="radio" name="single_route" 
+                       onChange={this.props.chooseRoute.bind(this, this.props.routeId, this.props.routes)}
+                />
                 <span className="single-route__caption">
-                    <h2>Варіант {this.props.routeId + 1}</h2>
-                    <span className="single-route__color" style={style} />
+                    <span className="single-route__color" style={style}>
+                        <span className="single-route__number">{this.props.routeId + 1}</span>
+                    </span>
                 </span>
-                <div className="single-route__text">
+                <span className="single-route__text" style={borderColor}>
+                    <span className="single-route__text__mask" style={style} />
                     <span>{this.props.totalDistance},</span>
                     <span>{this.props.totalDuration} в дорозі</span>
-                </div>
+                </span>
             </label>
         )
     }
