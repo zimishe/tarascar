@@ -11,7 +11,7 @@ var expressValidator = require('express-validator'),bodyParser = require('body-p
 mailer = require('express-mailer');
 
 module.exports.controller = function (app) {
-    // console.log(polyline.decode('"e}{nH}a{qCACYg@"'));
+    //console.log(polyline.decode('"e}{nH}a{qCACYg@"'));
     app.use(expressValidator());
 
     app.post('/trip', function (req, res) {
@@ -34,12 +34,10 @@ module.exports.controller = function (app) {
             return false;
         } else {
             var steps = [];
-            var polylineArr = [];
             data.steps.forEach(function(val,index,arr){
-                polylineArr.push(arr[index].polyline.points);
-                steps.push(arr[index].encoded_lat_lngs);
+                steps.push(arr[index]);
             });
-            // console.log(steps);
+             //console.log(steps);
             var tripData = {
               owner_id:data.userID,
               start_point_lat:data.startCoords.lat,
@@ -56,7 +54,7 @@ module.exports.controller = function (app) {
             };
 
             var promise = new Promise(function (resolve, reject) {
-                trips.create(tripData,steps,polylineArr, function (e, result) {
+                trips.create(tripData,steps, function (e, result) {
                     if (e != null) {
                         console.log(e);
                     } else {
@@ -76,5 +74,17 @@ module.exports.controller = function (app) {
         }
         //return res.sendStatus(200);
 
+    });
+
+    app.post('/search',function(req,res){
+        if (!req.body) return res.sendStatus(400);
+
+        var errors = [{}];
+        var data = req.body;
+        var s = 0;
+        var start = JSON.parse(JSON.stringify(data.start));
+        var end = JSON.parse(JSON.stringify(data.end));
+        console.log();
+        return true;
     });
 }
