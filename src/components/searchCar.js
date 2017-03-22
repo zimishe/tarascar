@@ -25,13 +25,14 @@ const mapDispatchToProps = function(dispatch) {
             
             let dataToSend = store.getState().coordsToSearch;
             
-            // request({
-            //     uri: config.server+'/search',
-            //     method: "post",
-            //     form: dataToSend
-            // }, function(error, response, body) {
-            //
-            // });
+             request({
+                 uri: config.server+'/search',
+                 method: "post",
+                 dataType:"json",
+                 form: dataToSend
+             }, function(error, response, body) {
+
+             });
         }
     };
 };
@@ -50,7 +51,7 @@ class SearchCar extends Component {
         let SearchAction = config.server+'/search';
         
         return (
-            <form action={SearchAction} onSubmit={this.props.carSearchHandler.bind(this)} className="car__search">
+            <form action={SearchAction} method="post" onSubmit={this.props.carSearchHandler.bind(this)} className="car__search">
                 <h2>Пошук авто поруч з вами</h2>
                 <div className="car__search__inputs">
                     <input type="text" id="from" name="data[from]" placeholder="від" required />
