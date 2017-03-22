@@ -1,7 +1,7 @@
 /**
  * Created by eugene on 03.03.17.
  */
-
+// eslint-disable-next-line
 import RoadPoint from './../../assets/img/roadpoint.png'
 
 export function showRoute(google, map) {
@@ -11,14 +11,16 @@ export function showRoute(google, map) {
     directionsDisplay = new google.maps.DirectionsRenderer({
         suppressMarkers: true
     });
-    directionsDisplay.setMap(map);
-    
+
+    directionsDisplay.setMap(null);
     
     let searchForm = document.querySelector('.car__search'),
         points = [];
     
     searchForm.addEventListener('submit', (e) => {
        e.preventDefault();
+
+        directionsDisplay.setMap(map);
 
         let fromVal = document.querySelector('#from').value,
             toVal = document.querySelector('#to').value;
@@ -48,24 +50,19 @@ export function showRoute(google, map) {
             directionsService.route(request, function(result, status) {
                 if (status === 'OK') {
                     directionsDisplay.setDirections(result);
-                    
-                    // console.log('r', result);
 
-                    let route = result.routes[0].legs[0],
-                        markersArr = [];
-                    
-                    // проставляем маркеры по всему маршруту с описанием изменения маршрута
-                    for (let i = 0, length = route.steps.length; i < length; i++) {
-                        let marker_detail = new google.maps.Marker({
-                            position: route.steps[i].start_point,
-                            map: map,
-                            icon: RoadPoint
-                        });
-
-                        markersArr.push(marker_detail);
-                    }
-
-                    // console.log('mddd1', markersArr[0].getPosition().lat());
+                    // let route = result.routes[0].legs[0],
+                    //     markersArr = [];
+                    //
+                    // for (let i = 0, length = route.steps.length; i < length; i++) {
+                    //     let marker_detail = new google.maps.Marker({
+                    //         position: route.steps[i].start_point,
+                    //         map: map,
+                    //         icon: RoadPoint
+                    //     });
+                    //
+                    //     markersArr.push(marker_detail);
+                    // }
                 }
             });
         }
