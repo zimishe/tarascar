@@ -110,13 +110,14 @@ exports.get = function(done) {
     //console.log(sql); return false;
     db.get().query(sql,function(err,result) {
         if (err) return done(err);
-
+        if(!result.length) return done(err,[]);
         function getInfo(item, callback) {
             db.get().query("select meta_v from trip_info where trip_id="+item.id,function(err,step){
                 if(err)  return callback(err);
                 callback(null,step);
             });
         }
+
         var promise = new Promise(function (resolve, reject) {
             result.forEach(function(item,i){
                 getInfo(item, function(err,step){
@@ -124,6 +125,7 @@ exports.get = function(done) {
                         console.log(err);
                     } else {
                         item.steps = step;
+                        //result.splice(i,'steps',step);
                         resolve(result);
                     }
                 })

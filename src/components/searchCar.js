@@ -26,13 +26,13 @@ const mapDispatchToProps = function(dispatch) {
             // eslint-disable-next-line
             let dataToSend = store.getState().coordsToSearch;
             
-            // request({
-            //     uri: config.server+'/search',
-            //     method: "post",
-            //     form: dataToSend
-            // }, function(error, response, body) {
-            //
-            // });
+             request({
+                 uri: config.server+'/search',
+                 method: "post",
+                 form: dataToSend
+             }, function(error, response, body) {
+
+             });
         }
     };
 };

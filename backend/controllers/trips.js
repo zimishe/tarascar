@@ -98,12 +98,23 @@ module.exports.controller = function (app) {
             trips.setWhere("quantity>0");
             trips.setWhere("DATE(t.date_start)>=DATE(CURDATE())","and");
 
-            trips.get(function(err,result){
-                s = 1;
-                res.json({result:result,s:s});
+            var promise =  new Promise(function (resolve, reject) {
+                trips.get(function(err,result){
+                    if (err != null) {
+                        console.log(err);
+                    } else {
+                        resolve(result);
+                    }
+                });
             });
 
-            res.json({result:result,s:s});
+            promise.then(function (trips) {
+                result = trips;
+                s = 1;
+                res.json({result:result,s:s});
+                //return res.sendStatus(200);
+            });
+
         }
 
         return true;
