@@ -100,14 +100,19 @@ exports.get = function(done) {
     var having = this.getHaving();
     var where = this.getWhere();
 
-    var sql = "Select distinct t.* "+filed+" from trip as t " +
-        "join trip_info as i on i.trip_id = t.id "+where+" "+ having;
-
+    var sql = "Select * from (Select distinct t.* "+filed+" from trip as t " +
+        "join trip_info as i on i.trip_id = t.id "+where+" "+ having+" " +
+        "union all " +
+        "Select distinct t.* "+filed+" from trip as t " +
+        "join trip_info as i on i.trip_id = t.id and meta_k='steps' "+where+" "+ having.replace('radiusStart<10  and','')+" " +
+        ") as trips " +
+        "group by id";
+    //console.log(sql); return false;
     db.get().query(sql,function(err,result) {
         if (err) return done(err);
 
         function getInfo(item, callback) {
-            db.get().query("select * from trip_info where trip_id="+item.id,function(err,step){
+            db.get().query("select meta_v from trip_info where trip_id="+item.id,function(err,step){
                 if(err)  return callback(err);
                 callback(null,step);
             });

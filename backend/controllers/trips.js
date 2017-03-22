@@ -91,12 +91,14 @@ module.exports.controller = function (app) {
 
             makeRadius(latS,lngS,'start_point_lat','start_point_lng','radiusStart');
             makeRadius(latE,lngE,'end_point_lat','end_point_lng','radiusEnd');
+            makeRadius(latS,lngS,'meta_v',null,'radiusStep');
 
             trips.setWhere("quantity>0");
             trips.setWhere("DATE(t.date_start)>=DATE(CURDATE())","and");
 
-            var items = trips.get(function(err,result){
-                //console.log(result);
+            trips.get(function(err,result){
+                s = 1;
+                res.json({result:result,s:s});
             });
         }
 
@@ -104,14 +106,26 @@ module.exports.controller = function (app) {
     });
 
     makeRadius = function(lat,lng,fieldLat,fieldLng,alias) {
-        var field = "( 3959 * acos( cos( radians("+lat+") )" +
-            "* cos( radians( t."+fieldLat+" ) )" +
-            "* cos( radians( t."+fieldLng+" )" +
-            "- radians("+lng+") )" +
-            "+ sin( radians("+lat+") )" +
-            "* sin( radians( t."+fieldLat+" ) )" +
-            ")" +
-            ") AS "+alias;
+        var field;
+        if(alias!='radiusStep') {
+             field = "( 3959 * acos( cos( radians("+lat+") )" +
+                "* cos( radians( t."+fieldLat+" ) )" +
+                "* cos( radians( t."+fieldLng+" )" +
+                "- radians("+lng+") )" +
+                "+ sin( radians("+lat+") )" +
+                "* sin( radians( t."+fieldLat+" ) )" +
+                ")" +
+                ") AS "+alias;
+        } else {
+             field = "( 3959 * acos( cos( radians("+lat+") )" +
+                "* cos( radians( SUBSTRING_INDEX( meta_v, ',', 1) ) )" +
+                "* cos( radians(  SUBSTRING_INDEX( meta_v, ',', -1) )" +
+                "- radians("+lng+") )" +
+                "+ sin( radians("+lat+") )" +
+                "* sin( radians( SUBSTRING_INDEX( meta_v, ',', 1) ) )" +
+                ")" +
+                ") AS "+alias;
+        }
 
         trips.setFiled(field);
 
