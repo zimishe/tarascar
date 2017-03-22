@@ -107,7 +107,7 @@ exports.get = function(done) {
         "join trip_info as i on i.trip_id = t.id and meta_k='steps' "+where+" having   (radiusStart <10 || radiusStepS<10)  and (radiusEnd<10  || radiusStepE<10) " +
         ") as trips " +
         "group by id";
-    console.log(sql); return false;
+    //console.log(sql); return false;
     db.get().query(sql,function(err,result) {
         if (err) return done(err);
 
