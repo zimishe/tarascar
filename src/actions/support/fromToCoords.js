@@ -3,7 +3,7 @@
  */
 
 import store from './../../store/store'
-
+// eslint-disable-next-line
 import { changePlace } from './../changePlace'
 import { showRoute } from './../showRoute'
 import { setPathToSearch } from './../setPathToSearch'
@@ -17,7 +17,13 @@ export function fromToCoords(map) {
     let placeFrom = document.getElementById('from'),
         placeTo = document.getElementById('to'),
         wayPt = document.getElementsByClassName('waypoint')[0],
-        markers = [];
+        markers = {},
+        trash = [];
+        
+        function removeMarkers() {
+            // markers.forEach((marker) => { marker.setMap(null) });
+            markers[1].setMap(null) 
+        }
         
     if ((placeFrom !== null) && (placeTo !== null)) {
         let searchFrom = new google.maps.places.SearchBox(placeFrom),
@@ -28,9 +34,9 @@ export function fromToCoords(map) {
         google.maps.event.addListener(searchFrom, 'places_changed', function() {
             let geocoder = new google.maps.Geocoder(),
                 address = placeFrom.value;
-
+            
             geocoder.geocode({ 'address': address }, function (results, status) {
-
+                
                 if (status === google.maps.GeocoderStatus.OK) {
                     let latitude = results[0].geometry.location.lat(),
                         longitude = results[0].geometry.location.lng();
@@ -39,7 +45,9 @@ export function fromToCoords(map) {
                         lat: latitude,
                         lng : longitude
                     };
-
+                    
+                    (markers.from !== undefined) && markers.from.setMap(null);
+                    
                     // eslint-disable-next-line
                     let markerFrom = new google.maps.Marker({
                         position: coords,
@@ -49,11 +57,11 @@ export function fromToCoords(map) {
                         animation: google.maps.Animation.DROP,
                         draggable: true
                     });
-
-                    markers.push(markerFrom);
+                    
+                    markers.from = markerFrom;
+                    
                     // store.dispatch(changePlace(markers));
                     markerFrom.setMap(map);
-
                     map.setCenter(coords);
                     
                     coordsToSearch.from = coords;
@@ -76,6 +84,8 @@ export function fromToCoords(map) {
                         lng : longitude
                     };
 
+                    (markers.to !== undefined) && markers.to.setMap(null);
+                    
                     // eslint-disable-next-line
                     let markerTo = new google.maps.Marker({
                         position: coords,
@@ -85,8 +95,10 @@ export function fromToCoords(map) {
                         animation: google.maps.Animation.DROP,
                         draggable: true
                     });
-
-                    markers.push(markerTo);
+                    
+                    markers.to = markerTo;
+                    markerTo.setMap(map);
+                    
                     map.setCenter(coords);
 
                     coordsToSearch.to = coords;

@@ -6,8 +6,11 @@
  */
 import store from './../../store/store'
 import { setRoutes } from './../../actions/setRoutes'
+// eslint-disable-next-line
 import request from 'request'
+// eslint-disable-next-line
 import config from './../../config'
+// eslint-disable-next-line
 import { setFinalRoute } from './../../actions/setFinalRoute'
 
 export function driverShowRoute(google, map) {
@@ -125,13 +128,13 @@ export function driverShowRoute(google, map) {
                             
                             console.log('ds', dataToSend);
 
-                            request({
-                                uri: config.server+'/trip',
-                                method: "post",
-                                form: dataToSend
-                            }, function(error, response, body) {
-                                console.log('r', response);
-                            });
+                            // request({
+                            //     uri: config.server+'/trip',
+                            //     method: "post",
+                            //     form: dataToSend
+                            // }, function(error, response, body) {
+                            //     console.log('r', response);
+                            // });
                         }
                     }
                 });
