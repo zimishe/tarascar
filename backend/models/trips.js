@@ -101,13 +101,13 @@ exports.get = function(done) {
     var where = this.getWhere();
 
     var sql = "Select * from (Select distinct t.* "+filed+" from trip as t " +
-        "join trip_info as i on i.trip_id = t.id "+where+" "+ having+" " +
+        "join trip_info as i on i.trip_id = t.id "+where+""+having+" "+
         "union all " +
         "Select distinct t.* "+filed+" from trip as t " +
-        "join trip_info as i on i.trip_id = t.id and meta_k='steps' "+where+" "+ having.replace('radiusStart<10  and','')+" " +
+        "join trip_info as i on i.trip_id = t.id and meta_k='steps' "+where+" having   (radiusStart <10 || radiusStepS<10)  and (radiusEnd<10  || radiusStepE<10) " +
         ") as trips " +
         "group by id";
-    //console.log(sql); return false;
+    console.log(sql); return false;
     db.get().query(sql,function(err,result) {
         if (err) return done(err);
 
@@ -131,7 +131,7 @@ exports.get = function(done) {
         });
 
         promise.then(function (result) {
-            console.log(result);
+            //console.log(result);
             done(null,result);
         });
     });

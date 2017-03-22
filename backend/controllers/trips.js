@@ -80,6 +80,7 @@ module.exports.controller = function (app) {
         if (!req.body) return res.sendStatus(400);
         //console.log(req.body);
         var errors = [{}];
+        var result = [];
         var data = req.body;
         var s = 0;
         var start = JSON.parse(JSON.stringify(data.from));
@@ -91,7 +92,8 @@ module.exports.controller = function (app) {
 
             makeRadius(latS,lngS,'start_point_lat','start_point_lng','radiusStart');
             makeRadius(latE,lngE,'end_point_lat','end_point_lng','radiusEnd');
-            makeRadius(latS,lngS,'meta_v',null,'radiusStep');
+            makeRadius(latS,lngS,'meta_v',null,'radiusStepS');
+            makeRadius(latE,lngE,'meta_v',null,'radiusStepE');
 
             trips.setWhere("quantity>0");
             trips.setWhere("DATE(t.date_start)>=DATE(CURDATE())","and");
@@ -100,6 +102,8 @@ module.exports.controller = function (app) {
                 s = 1;
                 res.json({result:result,s:s});
             });
+
+            res.json({result:result,s:s});
         }
 
         return true;
@@ -107,7 +111,7 @@ module.exports.controller = function (app) {
 
     makeRadius = function(lat,lng,fieldLat,fieldLng,alias) {
         var field;
-        if(alias!='radiusStep') {
+        if(alias!='radiusStepS' && alias!='radiusStepE') {
              field = "( 3959 * acos( cos( radians("+lat+") )" +
                 "* cos( radians( t."+fieldLat+" ) )" +
                 "* cos( radians( t."+fieldLng+" )" +
