@@ -15,10 +15,7 @@ const mapStateToProps = function() {
 
 const mapDispatchToProps = function(dispatch) {
     return {
-        dispatch,
-        searchHandler: (event) => {
-           
-        }
+        dispatch
     };
 };
 
@@ -27,7 +24,7 @@ class Search extends Component {
     render() {
         return (
             <div className="gmap__search">
-                <input type="search" ref="input" id="search" placeholder="Search.." onChange={this.props.searchHandler.bind(this)} />
+                <input type="search" ref="input" id="search" placeholder="Search.." />
             </div>
         )
     }

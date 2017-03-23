@@ -107,7 +107,6 @@ export function fromToCoords(map) {
                     coordsToSearch.to = coords;
 
                     store.dispatch(actionCreator()).then(() => {
-                        console.log('The end of poem', store.getState());
                         carSearchSendRequest(store.getState().coordsToSearch)
                     });
                 }

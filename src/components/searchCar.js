@@ -6,11 +6,7 @@ import React, { Component } from 'react'
 import store from './../store/store'
 import { connect } from 'react-redux'
 import { fromToCoords } from './../actions/support/fromToCoords'
-// eslint-disable-next-line
-import request from 'request'
 import config from './../config'
-
-import { carSearchSendRequest } from './../actions/support/carSearchSendRequest'
 
 const mapStateToProps = function() {
     let data = store.getState();
@@ -24,17 +20,6 @@ const mapDispatchToProps = function(dispatch) {
         dispatch,
         carSearchHandler: (event) => {
             event.preventDefault();
-            
-            // eslint-disable-next-line
-            let dataToSend = store.getState().coordsToSearch;
-            
-             request({
-                 uri: config.server+'/search',
-                 method: "post",
-                 form: dataToSend
-             }, function(error, response, body) {
-
-             });
         }
     };
 };

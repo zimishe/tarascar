@@ -12,6 +12,7 @@ import request from 'request'
 import config from './../../config'
 // eslint-disable-next-line
 import { setFinalRoute } from './../../actions/setFinalRoute'
+let polyline = require('polyline');
 
 export function driverShowRoute(google, map) {
     let directionsService = new google.maps.DirectionsService();
@@ -51,6 +52,8 @@ export function driverShowRoute(google, map) {
                         
                         if (data.finalRoute === '') {
                             result.routes.forEach((route, i) => {
+                                // console.log('dir', result);
+                                
                                 let directionsDisplay = new google.maps.DirectionsRenderer({
                                     map: map,
                                     suppressMarkers: true,
@@ -88,10 +91,9 @@ export function driverShowRoute(google, map) {
                                     startText: result.request.origin,
                                     endCoords: endCoords,
                                     endText : result.request.destination,
-                                    // steps: steps,
                                     durationStamp: durationStamp
                                 };
-
+                                
                                 directionsDisplay.addListener('directions_changed', function() {
                                     dataToStorage.steps = directionsDisplay.getDirections().routes[0].legs[0].steps;
                                 });
@@ -113,7 +115,9 @@ export function driverShowRoute(google, map) {
                         store.dispatch(setRoutes(routesData));
 
                         if (data.finalRoute !== '') {
-                            let stepsToSend = [];
+                            let stepsToSend = [],
+                                routeId = data.finalRoute[0].directionDisplay.routeIndex,
+                                chosenSteps = data.finalRoute[0].directionDisplay.directions.routes[routeId].legs[0].steps;
 
                             data.finalRoute[0].steps.forEach((el) => {
                                 let stepCoord = {
@@ -126,12 +130,24 @@ export function driverShowRoute(google, map) {
 
                             dataToSend.steps = stepsToSend;
 
+                            let polylines = [];
+
+                            chosenSteps.forEach((step) => {
+                                polylines.push(step.polyline.points)
+                            });
+                            
+                            dataToSend.polylines = polylines;
+                         
+                            // polylines.forEach((poly) => {
+                            //     console.log('dc', polyline.decode(poly));    
+                            // })
+                            
                             request({
                                 uri: config.server+'/trip',
                                 method: "post",
                                 form: dataToSend
                             }, function(error, response, body) {
-                                console.log('r', response);
+
                             });
                         }
                     }
