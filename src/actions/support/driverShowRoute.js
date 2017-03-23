@@ -125,16 +125,14 @@ export function driverShowRoute(google, map) {
                             });
 
                             dataToSend.steps = stepsToSend;
-                            
-                            console.log('ds', dataToSend);
 
-                            // request({
-                            //     uri: config.server+'/trip',
-                            //     method: "post",
-                            //     form: dataToSend
-                            // }, function(error, response, body) {
-                            //     console.log('r', response);
-                            // });
+                            request({
+                                uri: config.server+'/trip',
+                                method: "post",
+                                form: dataToSend
+                            }, function(error, response, body) {
+                                console.log('r', response);
+                            });
                         }
                     }
                 });

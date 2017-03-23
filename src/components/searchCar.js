@@ -10,6 +10,8 @@ import { fromToCoords } from './../actions/support/fromToCoords'
 import request from 'request'
 import config from './../config'
 
+import { carSearchSendRequest } from './../actions/support/carSearchSendRequest'
+
 const mapStateToProps = function() {
     let data = store.getState();
     return {
@@ -31,8 +33,9 @@ const mapDispatchToProps = function(dispatch) {
             //     method: "post",
             //     form: dataToSend
             // }, function(error, response, body) {
-            //
-            // });
+            //     console.log('b', body);
+            // });    
+            
         }
     };
 };
@@ -55,10 +58,7 @@ class SearchCar extends Component {
                 <h2>Пошук авто поруч з вами</h2>
                 <div className="car__search__inputs">
                     <input type="text" id="from" name="data[from]" placeholder="від" required />
-                    <input type="text" id="to" name="data[to]" placeholder="до" required />   
-                    <h3>Вкажіть проміжні точки маршруту</h3>
-                    <input type="text" className="waypoint" placeholder="проміжна точка" />
-                    <input type="text" className="waypoint" placeholder="проміжна точка" />
+                    <input type="text" id="to" name="data[to]" placeholder="до" required />
                     <button className="car__search__submit">Пошук</button>
                 </div>
             </form>

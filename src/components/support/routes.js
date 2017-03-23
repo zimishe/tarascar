@@ -24,8 +24,6 @@ const mapDispatchToProps = function(dispatch) {
                 
                 let chosen = offeredRoutes.filter((el, i) => i === routeID );
                 
-                console.log('chosen', chosen);
-                
                 store.dispatch(setFinalRoute(chosen));
                 
                 offeredRoutes[routeID].directionDisplay.setMap(map);

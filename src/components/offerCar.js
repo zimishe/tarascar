@@ -52,7 +52,7 @@ class OfferCar extends Component {
                         <input type="number" id="offer__price" name="offer__price" placeholder="Ціна" required/>
                         <input type="number" id="offer__places__count" name="offer__places__count" placeholder="К-ть місць" required />
                         <h3>Час</h3>
-                        <Datetime inputProps={inputFromProps}/>
+                        <Datetime inputProps={inputFromProps} dateFormat='YYYY-MM-DD HH:mm:ss'/>
                         <Datetime inputProps={inputToProps}/>
                         {checkRoutes()}
                         <button className="btn btn__submit">Створити</button>
