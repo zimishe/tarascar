@@ -95,6 +95,8 @@ module.exports.controller = function (app) {
             makeRadius(latS,lngS,'meta_v',null,'radiusStepS');
             makeRadius(latE,lngE,'meta_v',null,'radiusStepE');
 
+            trips.setHaving('(radiusStart<10  and radiusEnd<10)','and');
+            trips.setHaving('(radiusStart <10 || radiusStepS<10)  and (radiusEnd<10  || radiusStepE<10)','or');
             trips.setWhere("quantity>0");
             trips.setWhere("DATE(t.date_start)>=DATE(CURDATE())","and");
 
@@ -131,6 +133,7 @@ module.exports.controller = function (app) {
                 "* sin( radians( t."+fieldLat+" ) )" +
                 ")" +
                 ") AS "+alias;
+            //trips.setHaving(alias+'<10','and');
         } else {
              field = "( 3959 * acos( cos( radians("+lat+") )" +
                 "* cos( radians( SUBSTRING_INDEX( meta_v, ',', 1) ) )" +
@@ -144,6 +147,6 @@ module.exports.controller = function (app) {
 
         trips.setFiled(field);
 
-        trips.setHaving(alias+'<10','and');
+
     }
 }
