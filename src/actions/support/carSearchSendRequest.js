@@ -14,6 +14,8 @@ export function carSearchSendRequest(dataToSend) {
         let receivedData = JSON.parse(body),
             status = receivedData.s;
         
-        userShowAvailableRoutes(receivedData);
+        if (status === 1) {
+            userShowAvailableRoutes(receivedData);
+        }
     });
 }

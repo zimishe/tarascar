@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import store from './../store/store'
 import { connect } from 'react-redux'
 import { fromToCoords } from './../actions/support/fromToCoords'
+import UserFoundRoutes from './support/userFoundRoutes'
 import config from './../config'
 
 const mapStateToProps = function() {
@@ -36,6 +37,14 @@ class SearchCar extends Component {
     
     render() {
         let SearchAction = config.server+'/search';
+
+        function checkRoutes() {
+            let foundRoutes = store.getState().foundRoutes;
+
+            if (foundRoutes !== '') {
+                return <UserFoundRoutes />
+            }
+        }
         
         return (
             <form action={SearchAction} method="post" onSubmit={this.props.carSearchHandler.bind(this)} className="car__search">
@@ -45,6 +54,7 @@ class SearchCar extends Component {
                     <input type="text" id="to" name="data[to]" placeholder="до" required />
                     <button className="car__search__submit">Пошук</button>
                 </div>
+                {checkRoutes()}
             </form>
         )
     }

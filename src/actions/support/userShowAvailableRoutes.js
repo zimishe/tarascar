@@ -2,6 +2,8 @@
  * Created by eugene on 23.03.17.
  */
 const polyline = require('polyline');
+import store from './../../store/store'
+import { userShowFoundRoutes } from './../userShowFoundRoutes'
 
 export function userShowAvailableRoutes(availableRoutes) {
     let status = availableRoutes.s;
@@ -11,10 +13,12 @@ export function userShowAvailableRoutes(availableRoutes) {
             map = window.map,
             google = window.google,
             colors = ['#2196F3', '#7ec3b9', '#b7ab78', '#d6aaf3', '#66d1e6'];
-
+        
         routes.forEach((route, i) => {
-            let polylines = route.steps;
-
+            
+            let polylines = route.steps,
+                polylinesToSend = [];
+            
             polylines.forEach((poly) => {
                 let decoded = polyline.decode(poly.meta_v),
                     path = [];
@@ -43,8 +47,15 @@ export function userShowAvailableRoutes(availableRoutes) {
                    });
 
                    flightPath.setMap(map);
+
+                   polylinesToSend.push(flightPath);
                });
             });
+            
+            route.pathColor = colors[i];
+            route.polylines = polylinesToSend;
         });
+        
+        store.dispatch(userShowFoundRoutes(routes));
     }
 }
