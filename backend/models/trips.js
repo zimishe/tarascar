@@ -3,7 +3,7 @@
  */
 var db = require('../config/db.js');
 
-exports.create = function(data,steps, done) {
+exports.create = function(data,steps,polylines, done) {
     var keys = Object.keys(data);
     keys = keys.join();
     var values = Object.keys(data).map(function(key) {
@@ -14,6 +14,13 @@ exports.create = function(data,steps, done) {
         if (err) return done(err);
         var id = result.insertId;
         if(id>0) {
+            polylines.forEach(function (val,index,arr) {
+                db.get().query('INSERT INTO trip_info (trip_id,meta_k,meta_v) VALUES(?, ?, ?)', [id,'polylines',arr[index]], function(err, result) {
+                    if(err) return done(err);
+                    return true;
+                });
+            })
+
             steps.forEach(function (val,index,arr) {
                 var lat = arr[index]['lat'];
                 var lng= arr[index]['lng'];
@@ -112,7 +119,7 @@ exports.get = function(done) {
         if (err) return done(err);
         if(!result.length) return done(err,[]);
         function getInfo(item, callback) {
-            db.get().query("select meta_v from trip_info where trip_id="+item.id,function(err,step){
+            db.get().query("select meta_v from trip_info where trip_id="+item.id+" and meta_k='polylines'",function(err,step){
                 if(err)  return callback(err);
                 callback(null,step);
             });

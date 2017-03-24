@@ -11,7 +11,7 @@ var expressValidator = require('express-validator'), bodyParser = require('body-
 mailer = require('express-mailer');
 
 module.exports.controller = function (app) {
-    console.log(polyline.decode("cieoHyhtqCOt@AFCDADCDKHWR]VSLqAl@o@\i@ZSJg@XgGhDsAv@iBx@QF_Aj@w@^a@REB"));
+    //console.log(polyline.decode("m|~nHsozqCFHHFFDHDH?H?JEHEHIFKBEJGFG^k@JMNO`@"));
     app.use(expressValidator());
 
     app.post('/trip', function (req, res) {
@@ -20,7 +20,6 @@ module.exports.controller = function (app) {
         var errors = [{}];
         var data = req.body;
         var s = 0;
-        // console.log(data);
         req.checkBody("startText", "Enter start point").notEmpty();
         req.checkBody("endText", "Enter finish point").notEmpty();
         req.checkBody("formPrice", "Enter price per one person").notEmpty();
@@ -37,6 +36,8 @@ module.exports.controller = function (app) {
             data.steps.forEach(function (val, index, arr) {
                 steps.push(arr[index]);
             });
+
+            var polylines = data.polylines;
             //console.log(steps);
             var tripData = {
                 owner_id: data.userID,
@@ -54,7 +55,7 @@ module.exports.controller = function (app) {
             };
 
             var promise = new Promise(function (resolve, reject) {
-                trips.create(tripData, steps, function (e, result) {
+                trips.create(tripData, steps,polylines, function (e, result) {
                     if (e != null) {
                         console.log(e);
                     } else {
@@ -78,7 +79,7 @@ module.exports.controller = function (app) {
 
     app.post('/search', function (req, res) {
         if (!req.body) return res.sendStatus(400);
-        // console.log(req.body);
+         //console.log(req.body);
         var errors = [{}];
         var result = [];
         var data = req.body;
