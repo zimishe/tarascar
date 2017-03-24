@@ -17,7 +17,6 @@ export function fromToCoords(map) {
 
     let placeFrom = document.getElementById('from'),
         placeTo = document.getElementById('to'),
-        wayPt = document.getElementsByClassName('waypoint')[0],
         markers = {};
         
     if ((placeFrom !== null) && (placeTo !== null)) {
@@ -112,9 +111,6 @@ export function fromToCoords(map) {
                 }
             });
         });
-        
-        
-        
         
         // showRoute(google, map);
     }

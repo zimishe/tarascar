@@ -6,13 +6,10 @@
  */
 import store from './../../store/store'
 import { setRoutes } from './../../actions/setRoutes'
-// eslint-disable-next-line
 import request from 'request'
-// eslint-disable-next-line
 import config from './../../config'
-// eslint-disable-next-line
+import { offerSuccess } from './modals/offerSuccess'
 import { setFinalRoute } from './../../actions/setFinalRoute'
-let polyline = require('polyline');
 
 export function driverShowRoute(google, map) {
     let directionsService = new google.maps.DirectionsService();
@@ -46,9 +43,8 @@ export function driverShowRoute(google, map) {
                             end : result.request.destination
                         };
 
-                        let offeredRoutes = [];
-                        
-                        let data = store.getState();
+                        let offeredRoutes = [], 
+                            data = store.getState();
                         
                         if (data.finalRoute === '') {
                             result.routes.forEach((route, i) => {
@@ -64,8 +60,6 @@ export function driverShowRoute(google, map) {
                                         strokeColor: colors[i]
                                     }
                                 });
-
-                                // console.log('rr', route);
 
                                 let legs = route.legs,
                                     steps = route.legs[0].steps,
@@ -113,7 +107,7 @@ export function driverShowRoute(google, map) {
                         dataToSend.endTime = document.querySelector('#offer__end__time').value;
 
                         store.dispatch(setRoutes(routesData));
-
+                        
                         if (data.finalRoute !== '') {
                             let stepsToSend = [],
                                 routeId = data.finalRoute[0].directionDisplay.routeIndex,
@@ -137,17 +131,26 @@ export function driverShowRoute(google, map) {
                             });
                             
                             dataToSend.polylines = polylines;
-                         
-                            // polylines.forEach((poly) => {
-                            //     console.log('dc', polyline.decode(poly));    
-                            // })
                             
                             request({
                                 uri: config.server+'/trip',
                                 method: "post",
                                 form: dataToSend
                             }, function(error, response, body) {
-
+                                let status = JSON.parse(body).s;
+                                
+                                if (status === 1) {
+                                    offerSuccess();
+                                    searchForm.reset();
+                                    
+                                    let finalRoute = store.getState().finalRoute[0].directionDisplay,
+                                        datePicker = document.querySelector('#offer__start__time');
+                                    
+                                    store.dispatch(setFinalRoute(''));
+                                    datePicker.value = '';
+                                    
+                                    finalRoute.setMap(null);
+                                }
                             });
                         }
                     }

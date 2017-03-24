@@ -7,6 +7,7 @@ import MapRoutes from './support/routes'
 import { initOfferSearchFields } from './../actions/support/initOfferSearchFields'
 import store from './../store/store'
 import Datetime from 'react-datetime'
+import OfferSuccess from './../components/support/modals/offerSuccess'
 
 class OfferCar extends Component {
     componentDidMount() {
@@ -58,6 +59,7 @@ class OfferCar extends Component {
                         <button className="btn btn__submit">Створити</button>
                     </div>
                 </form>
+                <OfferSuccess />
             </div>
         )
     }

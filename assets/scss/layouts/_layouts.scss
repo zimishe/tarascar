@@ -277,6 +277,10 @@ h2 {
 .offer-car {
     &__form {
         margin-top: 20px;
+        
+        &__wrap {
+            position: relative;
+        }
 
         input:not([type="radio"]) {
             @include placeholder();

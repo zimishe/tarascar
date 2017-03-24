@@ -1,6 +1,7 @@
 /**
  * Created by eugene on 23.03.17.
  */
+const polyline = require('polyline');
 
 export function userShowAvailableRoutes(availableRoutes) {
     let status = availableRoutes.s;
@@ -8,35 +9,42 @@ export function userShowAvailableRoutes(availableRoutes) {
     if (status === 1) {
         let routes = availableRoutes.result,
             map = window.map,
-            google = window.google;
+            google = window.google,
+            colors = ['#2196F3', '#7ec3b9', '#b7ab78', '#d6aaf3', '#66d1e6'];
 
         routes.forEach((route, i) => {
-            let steps = route.steps,
-                path = [];
-            
-            console.log('r', route);
+            let polylines = route.steps;
 
-            steps.forEach((el) => {
-                let coord = el.meta_v,
-                    breaker = coord.indexOf(',');
+            polylines.forEach((poly) => {
+                let decoded = polyline.decode(poly.meta_v),
+                    path = [];
+
+                function decodePath() {
+                    return new Promise((resolve) => {
+                        decoded.forEach((el) => {
+                            let stepCoord = {
+                                lat: el[0],
+                                lng: el[1]
+                            };
+
+                            path.push(stepCoord);
+                        });
+                        resolve()
+                    })
+                }
                 
-                let stepCoord = {
-                    lat: parseFloat(coord.substring(0, breaker)),
-                    lng: parseFloat(coord.substring(breaker + 1, coord.length))
-                };
-                
-                path.push(stepCoord);
+               decodePath().then(() => {
+                   let flightPath = new google.maps.Polyline({
+                       path: path,
+                       geodesic: true,
+                       strokeColor: colors[i],
+                       strokeOpacity: 1.0,
+                       strokeWeight: 3
+                   });
+
+                   flightPath.setMap(map);
+               });
             });
-            
-            let flightPath = new google.maps.Polyline({
-                path: path,
-                geodesic: true,
-                strokeColor: '#FF0000',
-                strokeOpacity: 1.0,
-                strokeWeight: 2
-            });
-            flightPath.setMap(map);
-            
         });
     }
 }
