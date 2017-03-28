@@ -2,9 +2,6 @@ body {
     height:100vh;
     background: #e2e7ed;
     width: 100%;
-    display: table;
-    vertical-align: middle;
-    text-align: center;
     
     &:before {
         content: '';
@@ -32,7 +29,6 @@ h2 {
     &-app {
         display: flex;
         flex-wrap: wrap;
-        margin-top: 40px;
     }
     
     &__map {

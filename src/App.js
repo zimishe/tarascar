@@ -5,6 +5,7 @@ import store from './store/store'
 import UserPanel from './components/userPanel'
 import Map from './components/map'
 import Registration from './components/registration'
+import Sidebar from './components/sidebar'
 
 import { login } from './actions/login'
 
@@ -24,7 +25,9 @@ class App extends Component {
             <div className="gmap-app">
                 <UserPanel data={data} />
                 <Map />
-                {this.props.children}
+                <Sidebar>
+                    {this.props.children}    
+                </Sidebar>
                 <Registration />
             </div>
         )
