@@ -40,10 +40,23 @@ class FoundRoute extends Component {
                         <span className="found-route__number">{this.props.id + 1}</span>
                     </span>
                 </span>
-                <span className="found-route__text" style={borderColor}>
-                    <span className="found-route__text__mask" style={style} />
-                    <span>{durationToShow} в дорозі</span>
+                <span className="found-route__info">
+                     <span className="found-route__from">
+                        з: <strong>{this.props.from}</strong>
+                    </span>
+                    <span className="found-route__to">
+                        до: <strong>{this.props.to}</strong>
+                    </span>
+                    <span className="found-route__text" style={borderColor}>
+                        <span className="found-route__text__mask" style={style} />
+                        <span className="found-route__duration">{durationToShow} в дорозі</span>
+                        <span className="found-route__seats">К-ть місць: {this.props.seats}</span>
+                        <span className="found-route__price">
+                            Ціна: <strong>{this.props.price}</strong>  грн
+                        </span>
+                    </span>
                 </span>
+                
             </label>
         )
     }

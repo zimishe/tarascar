@@ -20,9 +20,6 @@ const mapDispatchToProps = function(dispatch) {
                     el.polylines.forEach(polyline => polyline.setMap(null));
                 });
                 
-                let chosen = route.filter((el, i) => i === routeID );
-                // store.dispatch(setFinalRoute(chosen));
-                
                 route[routeID].polylines.forEach(polyline => {
                     polyline.setMap(map)
                 })

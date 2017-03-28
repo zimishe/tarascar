@@ -5,8 +5,6 @@
 import React, { Component } from 'react'
 import store from './../../store/store'
 import { connect } from 'react-redux'
-// eslint-disable-next-line 
-import { setRoutes } from './../../actions/setRoutes'
 import SingleRoute from './singleRoute'
 import { setFinalRoute } from './../../actions/setFinalRoute'
 
@@ -15,18 +13,24 @@ const mapDispatchToProps = function(dispatch) {
         dispatch,
         chooseRoute: (routeID, route, event) => {
             let offeredRoutes = route.offeredRoutes,
-                map = window.map;
+                map = window.map,
+                chosen;
 
             if (offeredRoutes.length > 0) {
-                offeredRoutes.forEach((el) => {
-                    el.directionDisplay.setMap(null)
+                function resetRoutes() {
+                    return new Promise((resolve) => {
+                        offeredRoutes.forEach((el) => {
+                            el.directionDisplay.setMap(null);
+                        });
+                        resolve();
+                    })
+                }
+                
+                resetRoutes().then(() => {
+                    chosen = offeredRoutes.filter((el, i) => i === routeID );
+                    store.dispatch(setFinalRoute(chosen));
+                    offeredRoutes[routeID].directionDisplay.setMap(map);
                 });
-                
-                let chosen = offeredRoutes.filter((el, i) => i === routeID );
-                
-                store.dispatch(setFinalRoute(chosen));
-                
-                offeredRoutes[routeID].directionDisplay.setMap(map);
             }
         },
     };
@@ -41,10 +45,6 @@ const mapStateToProps = function() {
 };
 
 class MapRoutes extends Component {
-    componentDidMount() {
-       
-    }
-    
     render() {
         let mapRoutes = this.props.data.routes.offeredRoutes,
             routeFrom = this.props.data.routes.routePoints.start,

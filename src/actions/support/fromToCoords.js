@@ -3,9 +3,7 @@
  */
 
 import store from './../../store/store'
-// eslint-disable-next-line
-import { changePlace } from './../changePlace'
-import { showRoute } from './../showRoute'
+import { userShowFoundRoutes } from './../userShowFoundRoutes'
 import { setPathToSearch } from './../setPathToSearch'
 import { carSearchSendRequest } from './../../actions/support/carSearchSendRequest'
 
@@ -26,6 +24,8 @@ export function fromToCoords(map) {
                 coords : {},
                 markers : {}
             };
+        
+        store.dispatch(userShowFoundRoutes(''));
 
         const actionCreator = () => (dispatch) => {
             return new Promise(resolve => {
@@ -60,6 +60,7 @@ export function fromToCoords(map) {
                         animation: google.maps.Animation.DROP,
                         draggable: true
                     });
+                    
                     (coordsToSearch.markers.from !== undefined) && coordsToSearch.markers.from.setMap(null);
                     
                     markerFrom.setMap(map);

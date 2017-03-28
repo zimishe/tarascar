@@ -83,8 +83,8 @@ class RegModals extends Component{
                 <form action={loginAction} method="post" className="car__search active" id="login">
                     <h2>Login</h2>
                     <div className="car__search__inputs reg_inputs">
-                        <input type="text" name="email" className="waypoint" placeholder="E-mail" />
-                        <input type="text" name="password" className="waypoint" placeholder="Password" />
+                        <input type="email" name="email" className="waypoint" placeholder="E-mail" />
+                        <input type="password" name="password" className="waypoint" placeholder="Password" />
                         <button type="submit" className="car__search__submit" onClick={this.props.login.bind(this)}>Login</button>
                     </div>
                     <div className="bottom__info">
@@ -102,9 +102,9 @@ class RegModals extends Component{
                     <div className="car__search__inputs reg_inputs">
                         <input type="text" name="name" className="waypoint" placeholder="Name" />
                         <input type="text" name="surname" className="waypoint" placeholder="Surname" />
-                        <input type="text" name="email" className="waypoint" placeholder="E-mail" />
-                        <input type="text" name="password" className="waypoint" placeholder="Password" />
-                        <input type="text" name="repeat_password" className="waypoint" placeholder="Password" />
+                        <input type="email" name="email" className="waypoint" placeholder="E-mail" />
+                        <input type="password" name="password" className="waypoint" placeholder="Password" />
+                        <input type="password" name="repeat_password" className="waypoint" placeholder="Password" />
                         <button type="submit" className="car__search__submit" onClick={this.props.register.bind(this)}>Registration</button>
                     </div>
                     <div className="bottom__info">

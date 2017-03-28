@@ -316,7 +316,7 @@ h2 {
 }
 
 .routes-list {
-    margin-bottom: 30px;
+    margin: 30px 0;
     
     &__from,
     &__to {
@@ -395,6 +395,30 @@ h2 {
         justify-content: center;
     }
     
+    &__info {
+        display: flex;
+        flex-wrap: wrap;
+        flex-basis: 90%;
+        padding: 5px 15px;
+    }
+    
+    &__from,
+    &__to {
+        display: flex;
+        flex-basis: 100%;
+        font: rem(13px, 13px) $gotham-light;
+        color: #232323;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #ccc;
+        
+        strong {
+            padding-left: 10px;
+            font: rem(14px, 14px) $gotham-bold;
+            color: #1565C0;
+        }
+    }
+    
     &__text {
         display: flex;
         flex-basis: 70%;
@@ -424,5 +448,25 @@ h2 {
             transition: all .2s ease-out;
             border-left: 1px solid #fff;
         }
+    }
+    
+    &__price {
+        strong {
+            padding-left: 5px;
+        }
+    }
+}
+
+.found-route {
+    &__text {
+        flex-wrap: wrap;
+        flex-basis: 100%;
+        padding: 10px;
+        justify-content: space-between;
+    }
+    
+    &__duration {
+        flex-basis: 100%;
+        margin-bottom: 10px;
     }
 }
