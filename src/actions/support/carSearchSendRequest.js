@@ -9,7 +9,7 @@ export function carSearchSendRequest(dataToSend) {
     request({
         uri: config.server+'/search',
         method: "post",
-        form: dataToSend
+        form: dataToSend.coords
     }, function(error, response, body) {
         let receivedData = JSON.parse(body),
             status = receivedData.s;

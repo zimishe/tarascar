@@ -12,7 +12,7 @@ let reducer = function reducer(state = initialState, action) {
             isLogged: state.isLogged, 
             routes: state.routes, 
             finalRoute: state.finalRoute,
-            coordsToSearch: state.searchCoords,
+            coordsToSearch: state.coordsToSearch,
             foundRoutes: state.foundRoutes
         };
         
@@ -21,7 +21,7 @@ let reducer = function reducer(state = initialState, action) {
             isLogged: true, 
             routes: state.routes, 
             finalRoute: state.finalRoute,
-            coordsToSearch: state.searchCoords,
+            coordsToSearch: state.coordsToSearch,
             foundRoutes: state.foundRoutes
         };
         
@@ -30,7 +30,7 @@ let reducer = function reducer(state = initialState, action) {
             isLogged: false, 
             routes: state.routes, 
             finalRoute: state.finalRoute,
-            coordsToSearch: state.searchCoords,
+            coordsToSearch: state.coordsToSearch,
             foundRoutes: state.foundRoutes
         };
         
@@ -39,7 +39,7 @@ let reducer = function reducer(state = initialState, action) {
             isLogged: state.isLogged, 
             routes: action.routes, 
             finalRoute: state.finalRoute,
-            coordsToSearch: state.searchCoords,
+            coordsToSearch: state.coordsToSearch,
             foundRoutes: state.foundRoutes
         };
         
@@ -48,7 +48,7 @@ let reducer = function reducer(state = initialState, action) {
             isLogged: state.isLogged, 
             routes: state.routes, 
             finalRoute: action.finalRoute,
-            coordsToSearch: state.searchCoords,
+            coordsToSearch: state.coordsToSearch,
             foundRoutes: state.foundRoutes
         };
         
@@ -66,7 +66,7 @@ let reducer = function reducer(state = initialState, action) {
             isLogged: state.isLogged, 
             routes: state.routes, 
             finalRoute: state.finalRoute,
-            coordsToSearch: state.searchCoords,
+            coordsToSearch: state.coordsToSearch,
             foundRoutes: action.foundRoutes
         };
 
