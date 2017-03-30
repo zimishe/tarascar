@@ -24,10 +24,12 @@ class App extends Component {
         return(
             <div className="gmap-app">
                 <UserPanel data={data} />
-                <Map />
-                <Sidebar>
-                    {this.props.children}    
-                </Sidebar>
+                <div className="map-container">
+                    <Map />
+                    <Sidebar>
+                        {this.props.children}
+                    </Sidebar>    
+                </div>
                 <Registration />
             </div>
         )

@@ -36,11 +36,10 @@ class SearchCar extends Component {
     }
     
     render() {
-        let SearchAction = config.server+'/search';
-
+        let SearchAction = config.server+'/search',
+            foundRoutes = store.getState().foundRoutes;
+        
         function checkRoutes() {
-            let foundRoutes = store.getState().foundRoutes;
-
             if (foundRoutes !== '') {
                 return <UserFoundRoutes />
             }
