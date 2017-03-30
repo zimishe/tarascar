@@ -6,6 +6,7 @@ import UserPanel from './components/userPanel'
 import Map from './components/map'
 import Registration from './components/registration'
 import Sidebar from './components/sidebar'
+import ReserveConfirmation from './components/support/modals/reserveConfirmation'
 
 import { login } from './actions/login'
 
@@ -19,7 +20,14 @@ class App extends Component {
     }
     
     render() {
-        let data = this.props.data.isLogged;
+        let data = this.props.data.isLogged,
+            finalRoute = store.getState().userFinalRoute;
+
+        function checkFinalRoute() {
+            if (finalRoute !== '') {
+                return <ReserveConfirmation data={finalRoute} />
+            }
+        }
         
         return(
             <div className="gmap-app">
@@ -31,6 +39,7 @@ class App extends Component {
                     </Sidebar>    
                 </div>
                 <Registration />
+                {checkFinalRoute()}
             </div>
         )
     }

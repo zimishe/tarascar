@@ -46,7 +46,7 @@ class SearchCar extends Component {
         }
         
         return (
-            <form action={SearchAction} method="post" onSubmit={this.props.carSearchHandler.bind(this)} className="car__search">
+            <form action={SearchAction} method="post" onSubmit={this.props.carSearchHandler.bind(this)} className="car__search fullHeight">
                 <h2>Пошук авто поруч з вами</h2>
                 <div className="car__search__inputs">
                     <input type="text" id="from" name="data[from]" placeholder="від" required />
@@ -63,4 +63,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(SearchCar)
-

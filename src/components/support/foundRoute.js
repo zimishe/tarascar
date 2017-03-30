@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react'
+import moment from 'moment'
 
 class FoundRoute extends Component {
     render() {
@@ -12,7 +13,7 @@ class FoundRoute extends Component {
             borderColor = {
                 borderColor: this.props.routeColor
             };
-
+        
         function getFormattedTime(totalDuration) {
             if (totalDuration >= 3600) {
                 return {
@@ -28,7 +29,8 @@ class FoundRoute extends Component {
         }
         
         let duration = getFormattedTime(this.props.duration),
-            durationToShow = duration.hrs+' год. '+duration.mins+' хв. ';
+            durationToShow = duration.hrs+' год. '+duration.mins+' хв. ',
+            date = moment(this.props.startDate).lang('uk').format('DD.MM.YYYY, hh:mm a');
         
         return (
             <label className="found-route">
@@ -49,14 +51,17 @@ class FoundRoute extends Component {
                     </span>
                     <span className="found-route__text" style={borderColor}>
                         <span className="found-route__text__mask" style={style} />
+                        <span className="found-route__duration"><strong>Виїзд:</strong> {date}</span>
                         <span className="found-route__duration">{durationToShow} в дорозі</span>
-                        <span className="found-route__seats">К-ть місць: {this.props.seats}</span>
+                        <span className="found-route__seats"><strong>К-ть місць:</strong> {this.props.seats}</span>
                         <span className="found-route__price">
-                            Ціна: <strong>{this.props.price}</strong>  грн
+                            <strong>Ціна:</strong> {this.props.price}грн
                         </span>
                     </span>
                 </span>
-                
+                <button className="reserve-seat" onClick={this.props.showReserveModal}>
+                    Забронювати
+                </button>
             </label>
         )
     }

@@ -11,7 +11,8 @@ const initialState = {
     },
     finalRoute: '',
     coordsToSearch: '',
-    foundRoutes: ''
+    foundRoutes: '',
+    userFinalRoute: ''
 };
 
 export default initialState

@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { setRoutes } from './../../actions/setRoutes'
 
 import FoundRoute from './foundRoute'
+import { userChooseFinalRoute } from './../../actions/support/modals/userChooseRoute'
 
 const mapDispatchToProps = function(dispatch) {
     return {
@@ -22,9 +23,19 @@ const mapDispatchToProps = function(dispatch) {
                 
                 route[routeID].polylines.forEach(polyline => {
                     polyline.setMap(map)
-                })
+                });
+                
+                store.dispatch(userChooseFinalRoute(route[routeID]));
             }
         },
+        showReserveModal: () => {
+            let reserveModal = document.querySelector('.modal__summary');
+            
+            if (reserveModal !== null) {
+                reserveModal.classList.add('active');
+                document.body.classList.add('active');
+            }
+        }
     };
 };
 
@@ -62,6 +73,7 @@ class UserFoundRoutes extends Component {
                                 routeColor={el.pathColor}
                                 foundRoutes={foundRoutes}
                                 chooseRoute={this.props.chooseRoute}
+                                showReserveModal={this.props.showReserveModal}
                             />
                         )
                     }
