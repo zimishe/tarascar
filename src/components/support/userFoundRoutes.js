@@ -48,13 +48,29 @@ const mapStateToProps = function() {
 };
 
 class UserFoundRoutes extends Component {
+    componentDidMount() {
+        let list = document.querySelector('.routes-list');
+        
+        if (list !== null) {
+            
+        }
+    }
+    
     render() {
         let foundRoutes = this.props.data.foundRoutes;
         
+        function checkRoutes() {
+            if (foundRoutes.length > 0) {
+                return <h2>За даним запитом знайдені такі поїздки:</h2>
+            }   else {
+                return <h2>На жаль, за вашим запитом не знайдено жодної поїздки</h2>
+            }
+        }
+        
         return (
-            <div className="routes-list">
-                <h2>За даним запитом знайдені такі поїздки:</h2>
-                
+            <div className="routes-list ss-container">
+                {checkRoutes()}
+                       
                 <div className="single-routes">
                     {
                         foundRoutes.map((el, i) =>
