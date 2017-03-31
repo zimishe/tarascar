@@ -65,6 +65,24 @@
             visibility: visible;
             opacity: 1;
         }
+        
+        &__content {
+            &.hidden {
+                display: none;
+            }
+        }
+        
+        &__success {
+            display: none;
+            
+            h2 {
+                padding-bottom: 0;
+            }
+            
+            &.active {
+                display: block;
+            }   
+        }
 
         p {
             font: rem(14px, 18px) $light;
