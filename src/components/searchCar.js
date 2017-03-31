@@ -28,10 +28,12 @@ const mapDispatchToProps = function(dispatch) {
 class SearchCar extends Component {
     componentDidMount() {
         let map = window.map,
-            google = window.google;
+            google = window.google,
+            sidebar = document.querySelector('.gmap__sidebar');
 
         if ((map !== null) && (google !== undefined)) {
             fromToCoords(map);
+            sidebar.classList.add('active');
         }
     }
     

@@ -5,14 +5,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 
 class ActionsSwitcher extends Component {
-    componentDidMount() {
-        
-    }
-    
-    someShit() {
-        console.log('sk');
-    }
-    
     render() {
         let isLogged = this.props.isLogged;
         // eslint-disable-next-line 
@@ -25,10 +17,10 @@ class ActionsSwitcher extends Component {
         return (
             <ul className="actions__switcher">
                 <li>
-                    <Link to="find">Знайти водія</Link>
+                    <Link to="find" activeClassName="active">Знайти водія</Link>
                 </li>
                 <li>
-                    <Link to="offer" className={checkLogin()}>Створити поїздку</Link>
+                    <Link to="offer" activeClassName="active" className={checkLogin()}>Створити поїздку</Link>
                 </li>
             </ul>
         )

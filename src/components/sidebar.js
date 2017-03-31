@@ -12,6 +12,7 @@ class Sidebar extends Component {
             sidebar = document.querySelector('.gmap__sidebar');
         
         if (sidebarToggle !== null) {
+            sidebar.classList.add('active');
             sidebarToggle.onclick = (() => sidebar.classList.toggle('active'))
         }
     }

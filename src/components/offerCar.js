@@ -12,10 +12,12 @@ import OfferSuccess from './../components/support/modals/offerSuccess'
 class OfferCar extends Component {
     componentDidMount() {
         let map = window.map,
-            google = window.google;
+            google = window.google,
+            sidebar = document.querySelector('.gmap__sidebar');
         
         if ((map !== null) && (google !== undefined)) {
-            initOfferSearchFields(map)
+            initOfferSearchFields(map);
+            sidebar.classList.add('active');
         }
     }
     
