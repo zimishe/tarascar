@@ -79,7 +79,7 @@ module.exports.controller = function (app) {
 
     app.post('/search', function (req, res) {
         if (!req.body) return res.sendStatus(400);
-         //console.log(req.body);
+         console.log(req.body);
         var errors = [{}];
         var result = [];
         var data = req.body;
