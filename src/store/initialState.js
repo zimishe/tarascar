@@ -3,7 +3,6 @@
  */
 
 const initialState = {
-    markers: '',
     isLogged: false,
     routes: {
         routePoints: [],
@@ -14,5 +13,6 @@ const initialState = {
     foundRoutes: '',
     userFinalRoute: ''
 };
+
 
 export default initialState

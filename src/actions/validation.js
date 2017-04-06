@@ -54,7 +54,7 @@ export function validation(body) {
         bodyG.classList.remove('active');
         offerButton.classList.remove('logged-out');
 
-        browserHistory.push('offer');
+        // browserHistory.push('offer');
         
         // need to return username
         // console.log('success blyat');
