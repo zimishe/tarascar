@@ -3,9 +3,7 @@
  */
 
 import store from './../../store/store'
-// eslint-disable-next-line
-import { changePlace } from './../changePlace'
-import { showRoute } from './../showRoute'
+import { userShowFoundRoutes } from './../userShowFoundRoutes'
 import { setPathToSearch } from './../setPathToSearch'
 import { carSearchSendRequest } from './../../actions/support/carSearchSendRequest'
 
@@ -22,15 +20,18 @@ export function fromToCoords(map) {
     if ((placeFrom !== null) && (placeTo !== null)) {
         let searchFrom = new google.maps.places.SearchBox(placeFrom),
             searchTo = new google.maps.places.SearchBox(placeTo),
-            coordsToSearch = {};
+            coordsToSearch = {
+                coords : {},
+                markers : {}
+            };
+        
+        store.dispatch(userShowFoundRoutes(''));
 
         const actionCreator = () => (dispatch) => {
             return new Promise(resolve => {
                 dispatch(setPathToSearch(coordsToSearch));
                 resolve();
-            }).then(() => {
-                // console.log('2222');
-            });
+            })
         };
 
         google.maps.event.addListener(searchFrom, 'places_changed', function() {
@@ -60,13 +61,19 @@ export function fromToCoords(map) {
                         draggable: true
                     });
                     
-                    markers.from = markerFrom;
+                    (coordsToSearch.markers.from !== undefined) && coordsToSearch.markers.from.setMap(null);
                     
-                    // store.dispatch(changePlace(markers));
                     markerFrom.setMap(map);
                     map.setCenter(coords);
                     
-                    coordsToSearch.from = coords;
+                    coordsToSearch.coords.from = coords;
+                    coordsToSearch.markers.from = markerFrom;
+                    
+                    if (placeTo.value !== '') {
+                        store.dispatch(actionCreator()).then(() => {
+                            carSearchSendRequest(store.getState().coordsToSearch)
+                        });
+                    }
                 }
             });
         });
@@ -98,12 +105,14 @@ export function fromToCoords(map) {
                         draggable: true
                     });
                     
-                    markers.to = markerTo;
+                    (coordsToSearch.markers.to !== undefined) && coordsToSearch.markers.to.setMap(null);
+                    
                     markerTo.setMap(map);
                     
                     map.setCenter(coords);
 
-                    coordsToSearch.to = coords;
+                    coordsToSearch.coords.to = coords;
+                    coordsToSearch.markers.to = markerTo;
 
                     store.dispatch(actionCreator()).then(() => {
                         carSearchSendRequest(store.getState().coordsToSearch)
@@ -111,7 +120,5 @@ export function fromToCoords(map) {
                 }
             });
         });
-        
-        // showRoute(google, map);
     }
 }

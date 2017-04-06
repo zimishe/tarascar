@@ -15,7 +15,6 @@ export function driverShowRoute(google, map) {
     let directionsService = new google.maps.DirectionsService();
     
     let searchForm = document.querySelector('.offer-car__form'),
-        points = [],
         colors = ['#2196F3', '#7ec3b9', '#b7ab78', '#d6aaf3', '#66d1e6'],
         dataToSend;
 
@@ -26,7 +25,7 @@ export function driverShowRoute(google, map) {
             let fromVal = document.querySelector('#offer__from').value,
                 toVal = document.querySelector('#offer__to').value;
 
-            if(fromVal !== '' && toVal !== '' && points.length < 2) {
+            if(fromVal !== '' && toVal !== '') {
                 
                 let directionsRequest = {
                     origin: fromVal,
@@ -48,8 +47,6 @@ export function driverShowRoute(google, map) {
                         
                         if (data.finalRoute === '') {
                             result.routes.forEach((route, i) => {
-                                // console.log('dir', result);
-                                
                                 let directionsDisplay = new google.maps.DirectionsRenderer({
                                     map: map,
                                     suppressMarkers: true,
@@ -105,10 +102,11 @@ export function driverShowRoute(google, map) {
                         dataToSend.formPlacesCount = document.querySelector('#offer__places__count').value;
                         dataToSend.startTime = document.querySelector('#offer__start__time').value;
                         dataToSend.endTime = document.querySelector('#offer__end__time').value;
-
+                        
                         store.dispatch(setRoutes(routesData));
                         
                         if (data.finalRoute !== '') {
+                            
                             let stepsToSend = [],
                                 routeId = data.finalRoute[0].directionDisplay.routeIndex,
                                 chosenSteps = data.finalRoute[0].directionDisplay.directions.routes[routeId].legs[0].steps;
@@ -147,6 +145,7 @@ export function driverShowRoute(google, map) {
                                         datePicker = document.querySelector('#offer__start__time');
                                     
                                     store.dispatch(setFinalRoute(''));
+                                    
                                     datePicker.value = '';
                                     
                                     finalRoute.setMap(null);

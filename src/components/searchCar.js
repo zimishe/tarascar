@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import store from './../store/store'
 import { connect } from 'react-redux'
 import { fromToCoords } from './../actions/support/fromToCoords'
+import UserFoundRoutes from './support/userFoundRoutes'
 import config from './../config'
 
 const mapStateToProps = function() {
@@ -27,15 +28,24 @@ const mapDispatchToProps = function(dispatch) {
 class SearchCar extends Component {
     componentDidMount() {
         let map = window.map,
-            google = window.google;
+            google = window.google,
+            sidebar = document.querySelector('.gmap__sidebar');
 
         if ((map !== null) && (google !== undefined)) {
             fromToCoords(map);
+            sidebar.classList.add('active');
         }
     }
     
     render() {
-        let SearchAction = config.server+'/search';
+        let SearchAction = config.server+'/search',
+            foundRoutes = store.getState().foundRoutes;
+        
+        function checkRoutes() {
+            if (foundRoutes !== '') {
+                return <UserFoundRoutes />
+            }
+        }
         
         return (
             <form action={SearchAction} method="post" onSubmit={this.props.carSearchHandler.bind(this)} className="car__search">
@@ -45,6 +55,7 @@ class SearchCar extends Component {
                     <input type="text" id="to" name="data[to]" placeholder="до" required />
                     <button className="car__search__submit">Пошук</button>
                 </div>
+                {checkRoutes()}
             </form>
         )
     }
@@ -54,4 +65,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(SearchCar)
-

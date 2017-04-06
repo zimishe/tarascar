@@ -15,7 +15,20 @@ export function initOfferSearchFields(map) {
     
     let fromField = document.getElementById('offer__from'),
         toField = document.getElementById('offer__to'),
-        markers = [];
+        markers = [],
+        storedRoutes = store.getState().foundRoutes,
+        storedMarkers = store.getState().coordsToSearch;
+    
+    if (storedMarkers !== '') {
+        storedMarkers.markers.to.setMap(null);
+        storedMarkers.markers.from.setMap(null);
+    }
+    
+    if (storedRoutes.length > 0) {
+        storedRoutes.forEach(storedRoute => {
+            storedRoute.polylines.forEach(polyline => polyline.setMap(null))
+        })
+    }
     
     if ((fromField !== null) && (toField !== null)) {
         

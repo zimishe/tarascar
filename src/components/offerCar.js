@@ -12,10 +12,12 @@ import OfferSuccess from './../components/support/modals/offerSuccess'
 class OfferCar extends Component {
     componentDidMount() {
         let map = window.map,
-            google = window.google;
+            google = window.google,
+            sidebar = document.querySelector('.gmap__sidebar');
         
         if ((map !== null) && (google !== undefined)) {
-            initOfferSearchFields(map)
+            initOfferSearchFields(map);
+            sidebar.classList.add('active');
         }
     }
     
@@ -42,7 +44,7 @@ class OfferCar extends Component {
         };
         
         return (
-            <div className="offer-car__form__wrap">
+            <div className="offer-car__form__wrap fullHeight">
                 <form className="offer-car__form" id="offer_form" method="post">
                     <h2>Створити поїздку</h2>
                     <div className="offer-car__inputs">
