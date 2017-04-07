@@ -15,7 +15,7 @@ exports.getTripInfoId = function (trip_id,done) {
         ' and meta_k="steps" '+having+' limit 1';
     db.get().query(query,function(err,result) {
        if (err) return done(err);
-
+        return done(null,result[0]['id'])
     });
 }
 

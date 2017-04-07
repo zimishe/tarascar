@@ -44,7 +44,7 @@ class ReserveConfirmation extends Component {
             markers.from.setMap(null);
             markers.to.setMap(null);
 
-            store.dispatch(userShowFoundRoutes(''));
+            //store.dispatch(userShowFoundRoutes(''));
 
             setTimeout(() => {
                 modal.classList.remove('active');
