@@ -30,7 +30,7 @@ class ReserveConfirmation extends Component {
         // console.log('dts', dataToSend);
 
         request({
-            uri: config.server+'/carsearch',
+            uri: config.server+'/order',
             method: "post",
             form: dataToSend
         }, function(error, response, body) {

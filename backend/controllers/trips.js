@@ -6,6 +6,7 @@ var express = require('express');
 var polyline = require('polyline');
 
 var trips = require('../models/trips');
+let order = require('../models/order');
 var expressValidator = require('express-validator'), bodyParser = require('body-parser');
 
 mailer = require('express-mailer');
@@ -146,8 +147,12 @@ module.exports.controller = function (app) {
                 ") AS "+alias;
         }
 
+
         trips.setFiled(field);
 
-
+        return field;
     }
+
+    module.exports.makeRadius = makeRadius;
 }
+
