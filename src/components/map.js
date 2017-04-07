@@ -44,24 +44,10 @@ class Map extends Component {
         }
     }
     
-    componentWillUpdate() {
-        let markers = this.props.data.markers;
-        
-        function setMapOnAll(map) {
-            for (let i = 0; i < markers.length; i++) {
-                markers[i].setMap(map);
-            }
-        }
-        
-        if(markers !== '') {
-            setMapOnAll(null);
-        }   
-    }
-    
     render() {
         
         return (
-            <div className="gmap__map" id="map" ref="map"></div>
+            <div className="gmap__map" id="map" ref="map" />
         )
     }
 }

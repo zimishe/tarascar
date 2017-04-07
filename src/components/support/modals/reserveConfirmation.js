@@ -24,11 +24,12 @@ class ReserveConfirmation extends Component {
             markers = store.getState().coordsToSearch.markers;
         
         dataToSend.trip_id = data.id;
+        dataToSend.user_id = JSON.parse(sessionStorage.getItem('userData')).id;
         dataToSend.user_from = store.getState().coordsToSearch.coords.from;
         dataToSend.user_to = store.getState().coordsToSearch.coords.to;
         
         // console.log('dts', dataToSend);
-
+        
         request({
             uri: config.server+'/order',
             method: "post",
@@ -88,7 +89,7 @@ class ReserveConfirmation extends Component {
         
         let duration = getFormattedTime(data.duration),
             durationToShow = duration.hrs+'год '+duration.mins+'хв.',
-            date = moment(data.date_start).lang('uk').format('Do MMMM YYYY, hh:mm a');
+            date = moment(data.date_start).locale('uk').format('Do MMMM YYYY, hh:mm a');
         
         return (
             <div className="modal__summary">

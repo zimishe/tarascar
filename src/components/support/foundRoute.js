@@ -30,7 +30,7 @@ class FoundRoute extends Component {
         
         let duration = getFormattedTime(this.props.duration),
             durationToShow = duration.hrs+' год. '+duration.mins+' хв. ',
-            date = moment(this.props.startDate).lang('uk').format('DD.MM.YYYY, hh:mm a');
+            date = moment(this.props.startDate).locale('uk').format('DD.MM.YYYY, hh:mm a');
         
         return (
             <label className="found-route">

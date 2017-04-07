@@ -29,15 +29,21 @@ const mapDispatchToProps = function(dispatch) {
             }
         },
         showReserveModal: () => {
-            let reserveModal = document.querySelector('.modal__summary');
+            let reserveModal = document.querySelector('.modal__summary'),
+                isLogged = store.getState().isLogged,
+                formModal = document.querySelector('.forms-modal');
             
-            if (reserveModal !== null) {
+            if ((reserveModal !== null) && (isLogged === true)) {
                 reserveModal.classList.add('active');
+                document.body.classList.add('active');
+            }   else {
+                formModal.classList.toggle('active');
                 document.body.classList.add('active');
             }
         }
     };
 };
+
 
 const mapStateToProps = function() {
     let data = store.getState();
@@ -48,14 +54,6 @@ const mapStateToProps = function() {
 };
 
 class UserFoundRoutes extends Component {
-    componentDidMount() {
-        let list = document.querySelector('.routes-list');
-        
-        if (list !== null) {
-            
-        }
-    }
-    
     render() {
         let foundRoutes = this.props.data.foundRoutes;
         
